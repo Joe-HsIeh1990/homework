@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>備忘錄</title>
+  <link rel="stylesheet" href="css/all.css">
+  
+</head>
+<body>
+   <div class="wrap clearfix">
+     <div class="img">
+     <img class="logo" src="images/logo.svg">
+     </div>
+     <div class="content">
+        <div class="addList">
+          <input type="text" class="text"  placeholder="請填寫代辦內容" value="">
+          <input type="button" class="send" value="加入代辦">
+        </div>
+        <ul class="list"></ul>
+        
+     </div>
+  </div>
+<script>
+  let list = document.querySelector('.list');
+  let sendData = document.querySelector('.send');
+  let data = JSON.parse(localStorage.getItem('forget')) || [];
+  
+  sendData.addEventListener('click',addData);
+  list.addEventListener('click',addspeil);
+  newdata(data);
+  function newdata(item){
+    let str = '';
+    let len = item.length;
+    for(i=0;i<len;i++){
+      str+='<li><a href="#" data-index='+i+'>刪除</a><span>'+item[i].content+'<span></li>';
+    }
+    list.innerHTML = str ;
+    localStorage.setItem('forget',JSON.stringify(data));
+  }
+  function addData(e){
+    e.preventDefault();
+    let txt = document.querySelector('.text').value;
+    let todo = {
+      content : txt
+    }
+    data.push(todo);
+    document.querySelector('.text').value='';
+    newdata(data);
+  }
+  function addspeil(e){
+    e.preventDefault();
+    if(e.target.nodeName !== 'A'){return};
+    let datat = e.target.dataset.indax;
+    data.splice(datat,1);
+    localStorage.setItem('forget',JSON.stringify(data));
+    newdata(data);
+    
+  }
+
+  
+</script>
+</body>
+</html>
