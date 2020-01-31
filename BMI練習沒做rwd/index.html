@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="boot" href="bootstraptrun.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav>
+        <div class="containar bg-dark d-flex align-items-center justify-content-center position-relative" style="height: 300px;">
+            <div class="row  align-items-center flex-nowrap">
+                <div class=" mx-auto col-4">
+                    <img src="assets/BMICLogo.png" alt="">
+                </div>
+                <div class="mx-auto  col-4">
+                    <label for="" class="text-warning  mb-0">身高&nbsp;<small>cm</small></label><br>
+                    <input type="text" class="h py-1 mb-3" placeholder="&nbsp&nbsp請輸入身高"><br>
+                    <label for="" class="text-warning mb-0">體重&nbsp;<small>kg</small></label><br>
+                    <input type="text" class="w  py-1" placeholder="&nbsp&nbsp請輸入體重">
+                </div>
+                <div class="ml-5 col-4" id="cleanit">
+                    <div class="border btn p-2 mx-2 border-warning btn-warning rounded-circle font-weight-bold position-relative"
+                        id="btnchang">
+                        <p class="font text-center pt-4 h4">看結果</p>
+                        <button class="littlebtn-none" id=""></button>
+                    </div> 
+                </div>    
+            </div>
+            <p class="sat h4 font-weight-bold"></p>
+        </div>     
+    </nav>
+    <header class="my-0 pb-5 contanier-fluid" id="menufor">
+        <div class="container">
+            <div class="row flex-column align-items-center">
+                <div class="col-4 text-nowrap text-center mt-5 mb-3">
+                    <h3>BMI&nbsp;紀錄</h3>
+                </div>
+                <div class="">
+                    <ul class="flex-nowrap  list-unstyled justify-content-center" id="list"></ul>
+                </div>
+                <div class="pt-4"><a href="#" class="del text-decoration-none">清除所有紀錄</a></div>
+            </div>
+        </div>
+    </header>
+    <footer class="bg-warning py-5 contanier-fluid" id="footerchang">
+        <div class="container py-5">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-4" class="imgsiz justify-content-center">
+                    <img src="assets/BMICLogoblack.png " class="imgsiz mx-auto d-block" alt="">
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        //連結dom
+        let lists = document.getElementById('list');
+        let btn = document.querySelector('.btn');
+        let lis = document.getElementById('lis');
+        let del = document.querySelector('.del');
+        //處理空資料
+        let data = JSON.parse(localStorage.getItem('BMI')) || [];
+        //事件
+        del.addEventListener('click', delarray);
+        btn.addEventListener('click', pushData);
+        let re = document.querySelector('.littlebtn-none') || document.querySelector('.littlebtn');
+        re.addEventListener('click', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            window.location.reload();
+
+        })
+        newData(data);
+        function pushData(e) {
+            let hi = document.querySelector('.h').value;
+            let h = document.querySelector('.h').value / 100;
+            let w = document.querySelector('.w').value;
+            let bmi = w / (h * h);
+            btn.removeEventListener('click', pushData);
+            bmi = Math.floor(bmi * 10) / 10;
+            //定義動態資料
+            let status = '';
+            let light = '';
+            if (bmi < 18.5) {
+                status = '過輕';
+                light = 'run-green'
+                document.querySelector('.font').textContent = bmi;
+                document.querySelector('.font').style.color = 'greenyellow';
+                btnclassclean = btn.setAttribute('class', 'btn');
+                btn.setAttribute('id', 'btnchang-green');
+                let little = document.querySelector('.littlebtn-none') || document.querySelector('.littlebtn');
+                little.setAttribute('class', 'littlebtn');
+                little.setAttribute('id', 'littlegreen');
+                document.querySelector('.sat').textContent = '過輕';
+                document.querySelector('.sat').style.color = 'greenyellow';
+                
+            } else if (18.5 <= bmi && bmi < 24) {
+                status = '理想';
+                light = 'run-blue'
+                document.querySelector('.font').textContent = bmi;
+                document.querySelector('.font').style.color = 'rgb(21, 113, 252)';
+                btnclassclean = btn.setAttribute('class', 'btn');
+                btn.setAttribute('id', 'btnchang-blue');
+                let little = document.querySelector('.littlebtn-none') || document.querySelector('.littlebtn');
+                little.setAttribute('class', 'littlebtn');
+                little.setAttribute('id', 'littleblue');
+                document.querySelector('.sat').textContent = '理想';
+                document.querySelector('.sat').style.color = 'rgb(21, 113, 252)';
+            } else if (24 <= bmi && bmi < 27) {
+                status = '過重';
+                light = 'run-oriang'
+                document.querySelector('.font').textContent = bmi;
+                document.querySelector('.font').style.color = 'rgb(252, 255, 47)';
+                btnclassclean = btn.setAttribute('class', 'btn');
+                btn.setAttribute('id', 'btnchang-oriang');
+                let little = document.querySelector('.littlebtn-none') || document.querySelector('.littlebtn');
+                little.setAttribute('class', 'littlebtn');
+                little.setAttribute('id', 'littleoriang');
+                document.querySelector('.sat').textContent = '過重';
+                document.querySelector('.sat').style.color = 'rgb(252, 255, 47)';
+            } else if (27 <= bmi && bmi < 30) {
+                status = '輕度肥胖';
+                light = 'run-oriang1'
+                document.querySelector('.font').textContent = bmi;
+                document.querySelector('.font').style.color = 'rgb(255, 210, 86)';
+                btnclassclean = btn.setAttribute('class', 'btn');
+                btn.setAttribute('id', 'btnchang-oriang1');
+                let little = document.querySelector('.littlebtn-none') || document.querySelector('.littlebtn');
+                little.setAttribute('class', 'littlebtn');
+                little.setAttribute('id', 'littleoriang1');
+                document.querySelector('.sat').textContent = '輕度肥胖';
+                document.querySelector('.sat').style.color = 'rgb(255, 210, 86)';
+            } else if (30 <= bmi && bmi < 35) {
+                status = '中度肥胖';
+                light = 'run-oriang2';
+                document.querySelector('.font').textContent = bmi;
+                document.querySelector('.font').style.color = 'rgb(255, 155, 24)';
+                btnclassclean = btn.setAttribute('class', 'btn');
+                btn.setAttribute('id', 'btnchang-oriang2');
+                let little = document.querySelector('.littlebtn-none') || document.querySelector('.littlebtn');;
+                little.setAttribute('class', 'littlebtn');
+                little.setAttribute('id', 'littleoriang2');
+                document.querySelector('.sat').textContent = '中度肥胖';
+                document.querySelector('.sat').style.color = 'rgb(255, 155, 24)';
+            } else if (bmi >= 35) {
+                status = '重度肥胖';
+                light = 'run-red';
+                document.querySelector('.font').textContent = bmi;
+                document.querySelector('.font').style.color = 'red';
+                btnclassclean = btn.setAttribute('class', 'btn');
+                btn.setAttribute('id', 'btnchang-red');
+                let little = document.querySelector('.littlebtn-none') || document.querySelector('.littlebtn');;
+                little.setAttribute('class', 'littlebtn');
+                little.setAttribute('id', 'littlered');
+                document.querySelector('.sat').textContent = '重度肥胖';
+                document.querySelector('.sat').style.color = 'red';
+            }
+            //設定年月日
+            let d = new Date;
+            let year = d.getFullYear();
+            let month = d.getMonth() + 1;
+            let date = d.getDate();
+            let alldate = `${date}-${month}-${year}`;
+            //要做變化的變數放進物件
+            let bmiAll = {
+                Status: status,
+                Light: light,
+                BMI: bmi,
+                Date: alldate,
+                W: w,
+                H: hi
+            };
+            if (h == '') {
+                alert('請輸入身高');
+                newData();
+
+            } else if (w == '') {
+                alert('請輸入體重')
+                newData();
+
+            }
+            data.push(bmiAll);
+            newData(data);
+        }
+
+
+        // console.log(lb)
+        //更新介面資料
+        function newData(item) {
+            let str = '';
+            let len = item.length;
+            for (let i = 0; i < len; i++) {
+                str += '<li class="' + item[i].Light + ' px-3 bg-light my-3 d-flex flex-nowrap justify-content-between align-items-center" data-index="' + i + '"><div><b>&nbsp;' + item[i].Status + '</b></div><div><small>BMI</small>&nbsp;' + item[i].BMI + '</div><div><small>weight</small>&nbsp;' + item[i].W + 'kg</div><div><small>height</small>&nbsp' + item[i].H + 'cm</div><div><small>' + item[i].Date + '</small></div>';
+            }
+            list.innerHTML = str;
+            localStorage.setItem('BMI', JSON.stringify(data));
+        }
+        function delarray(e) {
+            data = [];
+            localStorage.setItem('BMI', JSON.stringify(data));
+            newData(data);
+        }
+    </script>
+</body>
+
+</html>

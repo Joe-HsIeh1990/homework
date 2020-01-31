@@ -1,0 +1,222 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+
+}
+#menufor{
+    background-color: rgb(224, 222, 222);
+   
+}
+/*大按鈕*/
+.btn{
+    height: 100px;
+    width: 100px;
+}
+
+
+
+/*更新大按鈕*/
+#btnchang-green{
+    border: 5px solid greenyellow;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+#btnchang-blue{
+    border: 5px solid rgb(21, 113, 252);
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+#btnchang-oriang{
+    border: 5px solid rgb(252, 255, 47);
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+#btnchang-oriang1{
+    border: 5px solid rgb(255, 210, 86);
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+#btnchang-oriang2{
+    border: 5px solid rgb(255, 155, 24);
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+#btnchang-red{
+    border: 5px solid red;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+
+/*小按鈕*/
+#littlegreen{
+    height: 20px;
+    width: 20px;
+    border: 1px  ;
+    border-radius: 50%;
+    background: url("assets/icons_loop copy.png") greenyellow no-repeat center;
+}
+#littleblue{
+    height: 20px;
+    width: 20px;
+    border: 1px  ;
+    border-radius: 50%;
+    background: url("assets/icons_loop copy.png") rgb(21, 113, 252) no-repeat center;
+}
+#littleoriang{
+    height: 20px;
+    width: 20px;
+    border: 1px  ;
+    border-radius: 50%;
+    background: url("assets/icons_loop copy.png") rgb(252, 255, 47) no-repeat center;
+}
+#littleoriang1{
+    height: 20px;
+    width: 20px;
+    border: 1px  ;
+    border-radius: 50%;
+    background: url("assets/icons_loop copy.png") rgb(255, 210, 86) no-repeat center;
+}
+#littleoriang2{
+    height: 20px;
+    width: 20px;
+    border: 1px  ;
+    border-radius: 50%;
+    background: url("assets/icons_loop copy.png") rgb(255, 155, 24) no-repeat center;
+}
+#littlered{
+    height: 20px;
+    width: 20px;
+    border: 1px  ;
+    border-radius: 50%;
+    background: url("assets/icons_loop copy.png") red no-repeat center;
+}
+.littlebtn-none{
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.littlebtn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.littlebtn:hover
+{   
+    animation: circleto 1s infinite linear;
+}
+@keyframes circleto{
+    from{transform: rotate(0deg)}
+    to{transform: rotate(360deg)}
+}
+
+
+.run-green {
+    border-left: 7px solid greenyellow;
+    width: 600px;
+    height: 50px;
+    font-size: 20px;
+    box-shadow: 0px 0px 35px rgba(0,0,0,0.3)
+}
+.run-green:hover{
+    transform: translate(-5px,-5px);
+    transition: 0.5s;
+    box-shadow: 5px 5px 60px;
+}
+.run-blue {
+    border-left: 7px solid rgb(21, 113, 252);
+    width: 600px;
+    height: 50px;
+    font-size: 20px;
+    box-shadow: 0px 0px 35px rgba(0,0,0,0.3)
+}
+.run-blue:hover{
+    transform: translate(-5px,-5px);
+    transition: 0.5s;
+    box-shadow: 5px 5px 60px;
+}
+.run-oriang {
+    border-left: 7px solid rgb(252, 255, 47);
+    width: 600px;
+    height: 50px;
+    font-size: 20px;
+    box-shadow: 0px 0px 35px rgba(0,0,0,0.3)
+}
+.run-oriang:hover{
+    transform: translate(-5px,-5px);
+    transition: 0.5s;
+    box-shadow: 5px 5px 60px;
+}
+.run-oriang1 {
+    border-left: 7px solid rgb(255, 210, 86);
+    width: 600px;
+    height: 50px;
+    font-size: 20px;
+    box-shadow: 0px 0px 35px rgba(0,0,0,0.3)
+}
+.run-oriang1:hover{
+    transform: translate(-5px,-5px);
+    transition: 0.5s;
+    box-shadow: 5px 5px 60px;
+}
+.run-oriang2 {
+    border-left: 7px solid rgb(255, 155, 24);
+    width: 600px;
+    height: 50px;
+    font-size: 20px;
+    box-shadow: 0px 0px 35px rgba(0,0,0,0.3)
+}
+.run-oriang2:hover{
+    transform: translate(-5px,-5px);
+    transition: 0.5s;
+    box-shadow: 5px 5px 60px;
+}
+.run-red {
+    border-left: 7px solid rgb(247, 16, 16);
+    width: 600px;
+    height: 50px;
+    font-size: 20px;
+    box-shadow: 0px 0px 35px rgba(0,0,0,0.3)
+}
+ .run-red:hover{
+     transform: translate(-5px,-5px);
+     transition: 0.5s;
+     box-shadow: 5px 5px 60px;
+ }
+nav input{
+
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    background: rgb(122, 122, 122);
+
+    
+}
+::-webkit-input-placeholder{
+    color: rgb(189, 189, 189);
+
+}
+::-webkit-input-placeholder{
+    color: rgb(189, 189, 189);
+
+}
+
+
+
+.imgsiz{
+    height: 50px;
+    width: 50px;
+}
+

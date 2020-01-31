@@ -1,0 +1,101 @@
+/* html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+};
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+};
+ol, ul {
+	list-style: none;
+}; */
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    list-style: none;
+
+}
+body{
+    background-color: rgb(214, 214, 214);
+}
+img{
+    width: 100%;
+    vertical-align: top; 
+    height: auto;
+}
+/*nav*/
+/*背景圖區塊*/
+ #nav-top{
+    background: url('assets/Hero.png') no-repeat center;
+    background-size: cover;
+    height: 400px;
+    width: 100%;
+}
+nav #drop{
+    opacity: 0.8;  
+}
+/*浮動區塊*/
+#nav-float{
+    width: 1000px;
+    height: 100px;
+    background-color: #eee;
+    top: 360px;
+    right: 230px;
+    z-index: 1;
+    
+
+}
+#bt1{
+    background-color: #be8abf;
+    color: white;
+    width: 120px;
+}
+#bt2{
+    background-color: #fe9801;
+    color: white;
+    width: 120px;
+}
+#bt3{
+    background-color: #ffd800;
+    color: white;
+    width: 120px;
+}
+#bt4{
+    background-color: #4d80e4;
+    color: white;
+    width: 120px;
+}
+/*灰色區塊*/
+#nav-down{
+    background-color: rgb(214, 214, 214);
+    height: 150px;
+    margin-top: 20px;
+    
+}
+#img-small{
+    height: 10px;
+    width: 10px;
+}
+
+.fol {
+    border: 1px solid ;
+    
+}
+
