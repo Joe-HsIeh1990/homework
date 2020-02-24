@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="click">
+        <label for="cell">稱呼</label>
+        <input type="text" id="cell">
+        <br>
+        <br>
+        <label for="newAge">年齡</label>
+        <input type="text" id="newAge">
+        <br>
+        <br>
+        <label for="newWeight">體重</label>
+        <input type="text" id="newWeight"> 
+        <br>
+        <br>
+        <label for="newHeight">身高</label>
+        <input type="text" id="newHeight">
+        <br>
+        <br>
+        
+        <input type="button" id="newData" value="新增">
+    </form>
+    <br>
+    <input type="button" id="backstatus" value="重製">
+    <select id="status">
+        <option value="age">年齡</option>
+        <option value="weight">體重</option>
+        <option value="height">身高</option>
+    </select>
+    <select id="changer">
+        <option value="height">高到低</option>
+        <option value="low">低到低</option>
+    </select>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>稱呼</th>
+                <th>年紀</th>
+                <th>體重</th>
+                <th>身高</th>
+            </tr>
+        </thead>
+        <tbody id="txt">
+
+        </tbody>
+    </table>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-database.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyAilQ8hzWo8Ug7Mm27P9_Q4XGaVM02s8Ok",
+            authDomain: "todolist-5a84d.firebaseapp.com",
+            databaseURL: "https://todolist-5a84d.firebaseio.com",
+            projectId: "todolist-5a84d",
+            storageBucket: "todolist-5a84d.appspot.com",
+            messagingSenderId: "1047242945225",
+            appId: "1:1047242945225:web:ec2b3d04abd0bdfd2ed318",
+            measurementId: "G-795BP3T8B5"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var data = {
+            "father": {
+                "title": "father",
+                "age": 44,
+                "weight": 88,
+                "height": 178
+            },
+            "mom": {
+                "title": "mom",
+                "age": 42,
+                "weight": 66,
+                "height": 166
+            },
+            "son": {
+                "title": "son",
+                "age": 13,
+                "weight": 40,
+                "height": 133
+            },
+            "daughter": {
+                "title": "daughter",
+                "age": 8,
+                "weight": 35,
+                "height": 110
+            }
+        };
+        //取得 DOM
+        let dataRef = firebase.database().ref('famliy');
+        let txt = document.getElementById('txt');
+        let changer = document.getElementById('changer');
+        let status = document.getElementById('status');
+        let backstatus = document.getElementById("backstatus");
+        let newData = document.getElementById('newData')
+        let content = document.getElementById('content');
+        //設置資料到FIREBASE
+        dataRef.set(data);
+        //執行監聽
+        status.addEventListener('change', () => {
+            getData(status.value, changer.value)
+        })
+        changer.addEventListener('change', () => {
+            getData(status.value, changer.value)
+        });
+        
+        //重製
+        backstatus.addEventListener('click', () => {
+            //刪除完後重製
+            dataRef.set(data);
+        });
+        //刪除資料
+        txt.addEventListener('click', (e) => {
+            if (e.target.parentNode.nodeName === 'TR') {
+                let target = e.target.parentNode.dataset.key;
+                dataRef.child(target).remove();
+            }
+        });
+        //顯示畫面
+        getData(status.value, changer.value);
+        //新增資料
+        newData.addEventListener('click',newSet)
+        //getData的參數 為了更換及執行的變數
+        //element 的參數 後續會帶入 status.value的值 是為了更換orderByChild的內容
+        //假設我們今天 status.value的值 選擇到年齡  會變成orderByChild('age') 就會依照年齡去做排序
+        function getData(element, value) {
+            dataRef.orderByChild(element).on('value', (snapshot) => {
+                let str = ''
+                let Data = [];
+                snapshot.forEach((item) => {
+                    Data.push(item.val());
+                })
+                //上面有個changer的下拉式選單 當我們選取到value 值為 height的時候 會去執行reverse的動作                
+                if (value === 'height') {
+                    Data = Data.reverse();
+                }
+                //設定完資料後 將資料寫入html
+                Data.forEach((item) => {
+                    str +=
+                        `
+                   <tr data-key="${item.title}">
+                     <td>${item.title}</td>
+                     <td>${item.age}</td>
+                     <td>${item.weight}</td>
+                     <td>${item.height}</td>
+                    </tr>
+                    `;
+                })
+                txt.innerHTML = str;
+            });
+        };
+        function newSet(e) {
+            let cell = document.getElementById('cell');
+            let a = document.getElementById('newAge');
+            let w = document.getElementById('newWeight');
+            let h = document.getElementById('newHeight');
+
+            dataRef.child(cell.value).set(
+               {
+                title:cell.value,
+                //因為這邊假設直接使用a.value的話 進去資料庫內的資料會是字串 故在此用parseInt()做轉換
+                age:parseInt(a.value),
+                weight:parseInt(w.value),
+                height: parseInt(h.value),
+            })
+            cell.value = '';
+            a.value = '';
+            w.value = '';
+            h.value = '';
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
