@@ -1,0 +1,252 @@
+// navbar
+#navbarNav a {
+  text-decoration-line: none;
+}
+.logo {
+  max-width: 80px;
+  max-height: 80px;
+}
+//aboutus
+#abc {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+#abc p {
+  color: white;
+  font-size: 18px;
+}
+#abc-title {
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+}
+.uslogo {
+  max-width: 130px;
+  max-height: 130px;
+}
+#slider {
+  height: 200px;
+  width: 80vw;
+  margin: auto;
+}
+.imge {
+  height: 200px;
+}
+#pagechange {
+  background-color: #000;
+}
+
+.pagechange {
+  background-color: rgb(0, 0, 0);
+  border: 1px outset rgb(48, 47, 47);
+  padding: 15px;
+  color: white;
+}
+.pagechange:hover {
+  box-shadow: 3px 3px rgb(95, 93, 93);
+  transform: translate(-5px, -5px);
+  transition: 0.5s;
+}
+#changemy {
+  background-color: rgb(27, 27, 27);
+  width: 80vw;
+}
+
+@media (min-width: 768px) {
+  #slider {
+    height: 90%;
+    width: 90%;
+    margin: auto;
+  }
+  .imge {
+    height: 450px;
+  }
+  #changemy {
+    background-color: rgb(27, 27, 27);
+    width: 50vw;
+  }
+  .img-h {
+    height: 55vh;
+  }
+  #hobit {
+    margin-top: 100px;
+    margin-bottom: 140px;
+  }
+}
+//index
+#timestory p,
+h1,
+h3,
+h4,
+li {
+  color: white;
+}
+/* select btn */
+#btn-flxed {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.btn-css {
+  background-color: rgb(20, 20, 20);
+  border: 1px outset rgb(61, 61, 61);
+}
+.btn-css:hover {
+  box-shadow: 2px 2px 10px red;
+}
+#mod {
+  height: 50px;
+  background-color: rgb(20, 20, 20);
+  color: white;
+  text-align: center;
+  text-align-last: center;
+  width: auto;
+  padding: 0 2%;
+  margin: 0;
+  box-shadow: 2px 2px 10px red;
+}
+#mod option {
+  text-align: center;
+}
+
+/* god tinme */
+#god {
+  position: relative;
+}
+#god h2::after {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 3px;
+  border: 1px inset #ffe75e;
+  left: 0;
+  top: 20px;
+  background-color: #ffe75e;
+}
+#god h2::before {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 3px;
+  border: 1px inset #ffe75e;
+  right: 0;
+  top: 20px;
+  background-color: #ffe75e;
+}
+#godtime {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+/* chose time */
+#chose {
+  position: relative;
+}
+#chose h2::after {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 3px;
+  border: 1px inset #960a00;
+  left: 0;
+  top: 20px;
+  background-color: #960a00;
+}
+#chose h2::before {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 3px;
+  border: 1px inset #960a00;
+  right: 0;
+  top: 20px;
+  background-color: #960a00;
+}
+#chosetime {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+/* sigmar */
+#sigmar {
+  position: relative;
+}
+#sigmar h2 {
+  color: #4caacf;
+}
+#sigmar h2::after {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 3px;
+  border: 1px inset #4caacf;
+  left: 0;
+  top: 20px;
+  background-color: #4caacf;
+}
+#sigmar h2::before {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 3px;
+  border: 1px inset #4caacf;
+  right: 0;
+  top: 20px;
+  background-color: #4caacf;
+}
+#sigmartime {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.box-story {
+  border: 2px outset rgb(61, 61, 61);
+  background-color: rgb(20, 20, 20);
+  border-radius: 5px;
+}
+.box-img {
+  border: 2px outset rgb(61, 61, 61);
+  border-radius: 5px;
+}
+
+/* time line */
+.time-line {
+  position: relative;
+  height: 50px;
+}
+.time-line span::after {
+  content: "";
+  position: absolute;
+  background-color: #ffe75e;
+  width: 0.5%;
+  height: 100%;
+  top: 0;
+  right: 50%;
+  bottom: 0;
+}
+.time-line-red {
+  position: relative;
+  height: 50px;
+}
+.time-line-red span::after {
+  content: "";
+  position: absolute;
+  background-color: #960a00;
+  width: 0.5%;
+  height: 100%;
+  top: 0;
+  right: 50%;
+  bottom: 0;
+}
+.time-line-blue {
+  position: relative;
+  height: 50px;
+}
+.time-line-blue span::after {
+  content: "";
+  position: absolute;
+  background-color: #4caacf;
+  width: 0.5%;
+  height: 100%;
+  top: 0;
+  right: 50%;
+  bottom: 0;
+}
+
+//-------------------咱是分隔線----------------------//
+
+
+
+
+//Dashboard
