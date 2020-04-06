@@ -17,9 +17,8 @@
                 <input
                   type="checkbox"
                   class="changeOrder"
-                  v-model="order.checked"
-                  :data-index="order.zoe"
-                  @click="GetProducts(order)"
+                  v-model="checkedNames"
+                  :value="order.title"
                 />
                 <label :for="order.zoe">{{order.name}}</label>
               </li>
@@ -33,7 +32,7 @@
           <form action method id="DeathSide">
             <ul class="d-flex flex-column justify-content-center align-items-center p-0">
               <li v-for="death in deathside" :key="death.zoe" class="my-2">
-                <input type="checkbox" />
+                <input type="checkbox" v-model="checkedNames" :value="death.title" />
                 <label :for="death.zoe">{{death.name}}</label>
               </li>
             </ul>
@@ -46,7 +45,7 @@
           <form action method id="ChaosSide">
             <ul class="d-flex flex-column justify-content-center align-items-center p-0">
               <li v-for="chaos in chaoseside" :key="chaos.zoe" class="my-2">
-                <input type="checkbox" />
+                <input type="checkbox" v-model="checkedNames" :value="chaos.title" />
                 <label :for="chaos.zoe">{{chaos.name}}</label>
               </li>
             </ul>
@@ -66,65 +65,47 @@
               <h2 class="text-dark text-center font-weight-bold">商品列表</h2>
             </div>
             <div class="line-of-item"></div>
-            <div class="row flex-wrap my-4 justify-content-center justify-content-md-start col-12">
-              <div
-                class="card my-2 col-3"
-                v-for="items in products"
-                :data-rou="items.category"
-                :key="items.id"
-              >
-                <img :src="items.imageUrl" class="card-img-top img-fluid" alt="..." />
-                <div class="card-body border-top border-dark bg-dark">
-                  <div>
-                    <p class="card-text">{{items.title}}</p>
-                  </div>
-                  <div class="d-flex flex-column">
-                    <div class="mt-3">
-                      <span>原價 $NT {{items.origin_price | currency}}元</span>
-                      <br />
-                      <span>現在只要$NT {{items.price | currency}}元</span>
+            <div class="d-flex my-4 justify-content-center col-12">
+              <!-- <loading :active.sync="isLoading"></loading> -->
+              <div class="d-flex flex-wrap justify-content-center">
+                <div
+                  class="card my-2 mx-1"
+                  style="width:251px;"
+                  v-for="items in filterData"
+                  :data-rou="items.category"
+                  :key="items.id"
+                >
+                  <img :src="items.imageUrl" class="card-img-top img-fluid" alt="..." />
+                  <div class="card-body border-top border-dark bg-dark">
+                    <div>
+                      <p class="card-text">{{items.title}}</p>
                     </div>
-                    <div class="align-self-end mt-3">
-                      <button class="text-end">加入購物車</button>
+                    <div class="d-flex flex-column">
+                      <div class="mt-3">
+                        <span>原價 $NT {{items.origin_price | currency}}元</span>
+                        <br />
+                        <span>現在只要$NT {{items.price | currency}}元</span>
+                      </div>
+                      <div class="align-self-end mt-3">
+                        <button class="text-end">加入購物車</button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item" :class="{'disabled': !pagination.has_pre}">
-                  <a
-                    class="page-link"
-                    href="#"
-                    aria-label="Previous"
-                    @click.prevent="GetProducts(pagination.current_page - 1)"
-                  >
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">上一頁</span>
-                  </a>
-                </li>
+            <nav class="my-5" aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
                 <li
                   class="page-item"
-                  v-for="page in pagination.total_pages"
+                  :class="{active:currentPage === page - 1}"
+                  v-for="page in filterData.length"
                   :key="page"
-                  :class="{'active' : pagination.current_page === page}"
                 >
-                  <a class="page-link" href="#" @click.prevent="GetProducts(page)">{{page}}</a>
-                </li>
-                <li class="page-item" :class="{'disabled': !pagination.has_next}">
-                  <a
-                    class="page-link bg-dark text-white"
-                    href="#"
-                    aria-label="Next"
-                    @click.prevent="GetProducts(pagination.current_page + 1)"
-                  >
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">下一頁</span>
-                  </a>
+                  <a href="#" class="page-link" @click.prevent="currentPage = page -1 ">{{page}}</a>
                 </li>
               </ul>
-            </nav>-->
+            </nav>
           </div>
         </div>
       </div>
@@ -164,44 +145,42 @@ export default {
         }
       ],
       deathside: [
-        { name: "食屍鬼", zoe: "Flesh-Eater", checked: false },
-        { name: "納加什軍團", zoe: "LegionsOfNagash", checked: false },
-        { name: "靈魂守衛者", zoe: "NightAunt", checked: false }
+        { name: "食屍鬼", zoe: "Flesh-Eater", title: "e", checked: false },
+        {
+          name: "納加什軍團",
+          zoe: "LegionsOfNagash",
+          title: "f",
+          checked: false
+        },
+        { name: "靈魂守衛者", zoe: "NightAunt", title: "g", checked: false }
       ],
       chaoseside: [
-        { name: "納垢蛆魔", zoe: "MaggotkinOfNurgle", checked: false },
-        { name: "恐虐之刃", zoe: "BladesOfKhorne", checked: false },
-        { name: "混沌野獸人", zoe: "BeastsOfChaos", checked: false }
+        {
+          name: "納垢蛆魔",
+          zoe: "MaggotkinOfNurgle",
+          title: "h",
+          checked: false
+        },
+        { name: "恐虐之刃", zoe: "BladesOfKhorne", title: "i", checked: false },
+        { name: "混沌野獸人", zoe: "BeastsOfChaos", title: "j", checked: false }
       ],
       products: [],
       // pagination: {},
-      filterArray: []
+      filterArray: [],
+      currentPage: 0,
+      checkedNames: []
     };
   },
   methods: {
-    GetProducts(item) {
+    GetProducts() {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/products/all`;
+      // vm.$store.state.isLoading = true;
       vm.$http.get(api).then(response => {
-        vm.filterArray = response.data.products;
-        if (item.checked === true) {
-          vm.orderside.forEach(el => {
-            if (el.title == item.title) {
-              vm.filterArray.forEach(e => {
-                if (el.zoe == e.category) {
-                  vm.products.push(e);
-                }
-              });
-            }
-          });
-        } else {
-          let ru
-
-          
-        }
+        // vm.$store.state.isLoading = false;
+        vm.products = response.data.products;
       });
     },
-
     DwrapDown(event) {
       let e = event.target.dataset.rol;
       let o = document.getElementById("OrderSide");
@@ -219,14 +198,62 @@ export default {
       }
     }
   },
-  watch: {},
+  computed: {
+    updateFilter() {
+      let array = [
+        {
+          king: this.orderside
+        },
+        {
+          king: this.deathside
+        },
+        {
+          king: this.chaoseside
+        }
+      ];
+      let activeCard = [];
+      let vm = this;
+      let filters = vm.checkedNames;
+      array.forEach(e => {
+        e.king.forEach(g => {
+          function cardContainsFilter(i) {
+            return g.title.indexOf(i) != -1;
+          }
+          if (filters.some(cardContainsFilter)) {
+            vm.products.forEach((el,i) => {
+              if (el.category === g.zoe) {
+                activeCard.push(el)
+              }
+            });
+          }
+        });
+      });
+      return activeCard;
+    },
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+    filterData() {
+      let vm = this;
+      const newProducts = [];
+      console.log(vm.updateFilter)
+      vm.updateFilter.forEach((item, i) => {
+        if (i % 8 === 0) {
+          newProducts.push([]);
+        }
+        const page = parseInt(i / 8);
+        newProducts[page].push(item);
+      });
+      return newProducts;
+    }
+  },
   mounted() {
     $("#OrderSide").hide();
     $("#DeathSide").hide();
     $("#ChaosSide").hide();
   },
   created() {
-    // this.GetProducts();
+    this.GetProducts();
   }
 };
 </script>
