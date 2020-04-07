@@ -71,7 +71,7 @@
                 <div
                   class="card my-2 mx-1"
                   style="width:251px;"
-                  v-for="items in filterData"
+                  v-for="items in filterData[currentPage]"
                   :data-rou="items.category"
                   :key="items.id"
                 >
@@ -98,7 +98,7 @@
               <ul class="pagination justify-content-center">
                 <li
                   class="page-item"
-                  :class="{active:currentPage === page - 1}"
+                  :class="{active: currentPage === page - 1}"
                   v-for="page in filterData.length"
                   :key="page"
                 >
@@ -199,7 +199,43 @@ export default {
     }
   },
   computed: {
-    updateFilter() {
+    // updateFilter() {
+    //   let array = [
+    //     {
+    //       king: this.orderside
+    //     },
+    //     {
+    //       king: this.deathside
+    //     },
+    //     {
+    //       king: this.chaoseside
+    //     }
+    //   ];
+    //   let activeCard = [];
+    //   let vm = this;
+    //   let filters = vm.checkedNames;
+    //   // console.log(filters)
+    //   array.forEach(e => {
+    //     e.king.forEach(g => {
+    //       function cardContainsFilter(i) {
+    //         return g.title.indexOf(i) != -1;
+    //       }
+    //       console.log(cardContainsFilter())
+    //       if (filters.some(cardContainsFilter)) {
+    //         vm.products.forEach(el => {
+    //           if (el.category === g.zoe) {
+    //             activeCard.push(el);
+    //           }
+    //         });
+    //       }
+    //     });
+    //   });
+    //   return activeCard;
+    // },
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+    filterData() {
       let array = [
         {
           king: this.orderside
@@ -213,31 +249,27 @@ export default {
       ];
       let activeCard = [];
       let vm = this;
-      let filters = vm.checkedNames;
-      array.forEach(e => {
-        e.king.forEach(g => {
-          function cardContainsFilter(i) {
-            return g.title.indexOf(i) != -1;
-          }
-          if (filters.some(cardContainsFilter)) {
-            vm.products.forEach((el,i) => {
-              if (el.category === g.zoe) {
-                activeCard.push(el)
-              }
-            });
-          }
-        });
-      });
-      return activeCard;
-    },
-    isLoading() {
-      return this.$store.state.isLoading;
-    },
-    filterData() {
-      let vm = this;
+      let filters =  vm.checkedNames
       const newProducts = [];
-      console.log(vm.updateFilter)
-      vm.updateFilter.forEach((item, i) => {
+      if (filters != 0) {
+         array.forEach(e => {
+          e.king.forEach(g => {
+            function cardContainsFilter(i) {
+              return g.title.indexOf(i) != -1;
+            }
+            if (filters.some(cardContainsFilter)) {
+              vm.products.forEach((item, i) => {
+                if (item.category === g.zoe) {
+                  activeCard.push(item);
+                }
+              });
+            };
+          });
+        });
+      } else{
+        activeCard = vm.products;
+      };
+      activeCard.forEach((item, i) => {
         if (i % 8 === 0) {
           newProducts.push([]);
         }
@@ -251,6 +283,7 @@ export default {
     $("#OrderSide").hide();
     $("#DeathSide").hide();
     $("#ChaosSide").hide();
+    this.filterData;
   },
   created() {
     this.GetProducts();
