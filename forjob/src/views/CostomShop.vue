@@ -66,7 +66,7 @@
             </div>
             <div class="line-of-item"></div>
             <div class="d-flex my-4 justify-content-center col-12">
-              <!-- <loading :active.sync="isLoading"></loading> -->
+              <loading :active.sync="isLoading"></loading>
               <div class="d-flex flex-wrap justify-content-center">
                 <div
                   class="card my-2 mx-1"
@@ -82,12 +82,12 @@
                     </div>
                     <div class="d-flex flex-column">
                       <div class="mt-3">
-                        <span>原價 $NT {{items.origin_price | currency}}元</span>
+                        <span style="text-decoration-line: line-through;">原價 $NT {{items.origin_price | currency}}元</span>
                         <br />
                         <span>現在只要$NT {{items.price | currency}}元</span>
                       </div>
                       <div class="align-self-end mt-3">
-                        <button class="text-end">加入購物車</button>
+                        <button class="text-end" @click.prevent="GetProductOne(items.id)">詳細內容</button>
                       </div>
                     </div>
                   </div>
@@ -106,6 +106,53 @@
                 </li>
               </ul>
             </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="ProductModel"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-dark">
+            <h5 class="modal-title" id="exampleModalCenterTitle">商品內容</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="text-white">&times;</span>
+            </button>
+          </div>
+          <div
+            class="modal-body d-flex flex-md-row flex-column justify-content-center justify-content-md-between text-dark"
+          >
+            <div class="col-md-7 col-12" style="height:100%">
+              <img :src="productone.imageUrl" class="img-fluid" alt />
+            </div>
+            <div
+              class="col-md-5 col-10 h4 mt-3 d-flex flex-column align-self-center justify-content-md-start"
+            >
+              <div>品名:</div>
+              <div class="mb-2">{{productone.title}}</div>
+              <div>類型:</div>
+              <div class="mb-2">{{productone.description}}</div>
+              <div>種族:</div>
+              <div class="mb-2">{{productone.category}}</div>
+              <div>售價:</div>
+              <div class="mb-3">{{productone.price | currency}}元</div>
+              <select name="numberitem" id="selectnum" v-model="productone.is_enabled" c>
+                <option :value="num" v-for="num in  10" :key="num">選購: {{num}} {{productone.unit}}</option>
+              </select>
+              <div class="mt-3">小計總額:</div>
+              <div>{{productone.is_enabled * productone.price | currency }}元</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-lg " data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-dark btn-lg ">確認加入購物車</button>
           </div>
         </div>
       </div>
@@ -145,7 +192,7 @@ export default {
         }
       ],
       deathside: [
-        { name: "食屍鬼", zoe: "Flesh-Eater", title: "e", checked: false },
+        { name: "食屍鬼貴族", zoe: "Flesh-Eater", title: "e", checked: false },
         {
           name: "納加什軍團",
           zoe: "LegionsOfNagash",
@@ -165,20 +212,37 @@ export default {
         { name: "混沌野獸人", zoe: "BeastsOfChaos", title: "j", checked: false }
       ],
       products: [],
-      // pagination: {},
-      filterArray: [],
+      productone: {},
       currentPage: 0,
-      checkedNames: []
+      checkedNames: [],
+      status: {
+        loadingItem: ""
+      }
     };
   },
   methods: {
     GetProducts() {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/products/all`;
-      // vm.$store.state.isLoading = true;
+      console.log(api);
+      vm.$store.dispatch("isLoad", true);
       vm.$http.get(api).then(response => {
-        // vm.$store.state.isLoading = false;
+        vm.$store.dispatch("isLoad", false);
         vm.products = response.data.products;
+      });
+    },
+    GetProductOne(item) {
+      const vm = this;
+      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/product/${item}`;
+      console.log(api);
+      vm.$store.dispatch("isLoad", true);
+      vm.status.loadingItem = item;
+      console.log(vm.status.loadingItem);
+      vm.$http.get(api).then(response => {
+        $("#ProductModel").modal("show");
+        vm.productone = response.data.product;
+        vm.status.loadingItem = "";
+        vm.$store.dispatch("isLoad", false);
       });
     },
     DwrapDown(event) {
@@ -199,39 +263,6 @@ export default {
     }
   },
   computed: {
-    // updateFilter() {
-    //   let array = [
-    //     {
-    //       king: this.orderside
-    //     },
-    //     {
-    //       king: this.deathside
-    //     },
-    //     {
-    //       king: this.chaoseside
-    //     }
-    //   ];
-    //   let activeCard = [];
-    //   let vm = this;
-    //   let filters = vm.checkedNames;
-    //   // console.log(filters)
-    //   array.forEach(e => {
-    //     e.king.forEach(g => {
-    //       function cardContainsFilter(i) {
-    //         return g.title.indexOf(i) != -1;
-    //       }
-    //       console.log(cardContainsFilter())
-    //       if (filters.some(cardContainsFilter)) {
-    //         vm.products.forEach(el => {
-    //           if (el.category === g.zoe) {
-    //             activeCard.push(el);
-    //           }
-    //         });
-    //       }
-    //     });
-    //   });
-    //   return activeCard;
-    // },
     isLoading() {
       return this.$store.state.isLoading;
     },
@@ -249,10 +280,11 @@ export default {
       ];
       let activeCard = [];
       let vm = this;
-      let filters =  vm.checkedNames
+      let filters = vm.checkedNames;
       const newProducts = [];
       if (filters != 0) {
-         array.forEach(e => {
+        vm.currentPage = 0;
+        array.forEach(e => {
           e.king.forEach(g => {
             function cardContainsFilter(i) {
               return g.title.indexOf(i) != -1;
@@ -263,12 +295,12 @@ export default {
                   activeCard.push(item);
                 }
               });
-            };
+            }
           });
         });
-      } else{
+      } else {
         activeCard = vm.products;
-      };
+      }
       activeCard.forEach((item, i) => {
         if (i % 8 === 0) {
           newProducts.push([]);
@@ -280,10 +312,10 @@ export default {
     }
   },
   mounted() {
+    $("#shopbox").hide();
     $("#OrderSide").hide();
     $("#DeathSide").hide();
     $("#ChaosSide").hide();
-    this.filterData;
   },
   created() {
     this.GetProducts();
@@ -309,6 +341,7 @@ input {
 }
 #costomshop {
   height: 100%;
+  position: relative;
 }
 #shop-item,
 #select-items {
@@ -323,6 +356,7 @@ input {
   height: 100%;
   border: 1px solid black;
   background-color: rgba(0, 0, 0, 0.8);
+  
 }
 .line-of-item {
   width: 96.5%;
@@ -333,5 +367,14 @@ input {
 #items-here {
   background: #eee;
   width: 95%;
+}
+#shopbox {
+  position: absolute;
+  z-index: 1;
+  top: 25%;
+  left: 25%;
+  background: black;
+  width: 50%;
+  height: 50%;
 }
 </style>

@@ -29,6 +29,7 @@
   </div>
 </template>
 <script>
+import $ from 'jquery';
 export default {
   data() {
     return {
@@ -54,6 +55,7 @@ export default {
     cancelit(){
       let vm = this;
       vm.$store.dispatch('updatelog', false)
+      
     }
   }
 };

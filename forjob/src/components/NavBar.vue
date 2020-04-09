@@ -52,6 +52,7 @@ export default {
     LoginCreate() {
       let vm = this;
       vm.$store.dispatch("updatelog", true);
+      
     }
   },
   computed: {},

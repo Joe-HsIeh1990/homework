@@ -6,6 +6,11 @@
 <script>
 export default {
   name: "App",
+  computed:{
+    isLoading(){
+      vm.$store.state.isLoading;
+    }
+  }
 };
 </script>
 

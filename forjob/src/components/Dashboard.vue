@@ -15,7 +15,7 @@
             <Login />
           </div>
         </div>
-        <div class="row justify-content-center align-items-center" v-if="shopshowit" id="Dasg-log">
+        <div class="row justify-content-center align-items-center" v-if="shopshowit" id="Dasg-log2">
           <div class="col-md-5">
             <CostomPagge />
           </div>
@@ -43,10 +43,10 @@ export default {
     return {};
   },
   methods: {
-    ShowShop(){
-      let vm = this;
-      vm.$store.dispatch('ClickShop', true);
-    }
+    // ShowShop(){
+    //   let vm = this;
+    //   vm.$store.dispatch('showshop', true);
+    // }
   },
   computed: {
     logshowit() {
@@ -54,7 +54,7 @@ export default {
       
     },
     shopshowit() {
-      return this.$store.state.ShopShow;
+      return this.$store.state.shopshow;
     }
   }
 };
@@ -70,6 +70,14 @@ export default {
   height: 100%;
 }
 #Dasg-log {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+#Dasg-log2 {
   position: fixed;
   top: 0;
   left: 0;

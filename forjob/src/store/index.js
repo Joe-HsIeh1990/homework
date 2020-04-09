@@ -8,25 +8,30 @@ export default new Vuex.Store({
   strict:true,
   state: {
     logShow: false,
-    ShopShow: false,
+    isLoading:false,
+    shopshow: false
   },
   mutations: {
     LOGSHOWED(state, payload){
       state.logShow = payload;
     },
     SHOPSHOW(state, payload){
-      state.ShopShow = payload;
+      state.shopshow = payload;
+    },
+    ISLOADING(state, payload){
+      state.isLoading = payload;
     }
-
   },
   actions: {
     updatelog(context , payload){
       context.commit('LOGSHOWED', payload)
     },
-    ClickShop(context , payload){
-      context.commit('SHOPSHOW', payload);
+    isLoad(context , payload){
+      context.commit('ISLOADING', payload)
+    },
+    showshop(context , payload){
+      context.commit('SHOPSHOW', payload)
     }
-
   },
   getters:{
 
