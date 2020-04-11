@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid my-5" id="costomshop">
-    <div class="row m-4">
+    <div class="row m-4 justify-content-center">
       <div class="row col-md-3 justify-content-start align-items-center" id="select-items">
         <div
           class="d-flex flex-column justify-content-center align-items-center col-md-9 my-3 text-light"
@@ -82,7 +82,9 @@
                     </div>
                     <div class="d-flex flex-column">
                       <div class="mt-3">
-                        <span style="text-decoration-line: line-through;">原價 $NT {{items.origin_price | currency}}元</span>
+                        <span
+                          style="text-decoration-line: line-through;"
+                        >原價 $NT {{items.origin_price | currency}}元</span>
                         <br />
                         <span>現在只要$NT {{items.price | currency}}元</span>
                       </div>
@@ -118,7 +120,7 @@
       aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-dialog modal-dialog-centered modal-lg madal-md-sm" role="document">
         <div class="modal-content">
           <div class="modal-header bg-dark">
             <h5 class="modal-title" id="exampleModalCenterTitle">商品內容</h5>
@@ -151,15 +153,14 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-lg " data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-dark btn-lg ">確認加入購物車</button>
+            <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-dark btn-lg">確認加入購物車</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import $ from "jquery";
 export default {
@@ -312,7 +313,6 @@ export default {
     }
   },
   mounted() {
-    $("#shopbox").hide();
     $("#OrderSide").hide();
     $("#DeathSide").hide();
     $("#ChaosSide").hide();
@@ -356,7 +356,6 @@ input {
   height: 100%;
   border: 1px solid black;
   background-color: rgba(0, 0, 0, 0.8);
-  
 }
 .line-of-item {
   width: 96.5%;
@@ -367,14 +366,5 @@ input {
 #items-here {
   background: #eee;
   width: 95%;
-}
-#shopbox {
-  position: absolute;
-  z-index: 1;
-  top: 25%;
-  left: 25%;
-  background: black;
-  width: 50%;
-  height: 50%;
 }
 </style>
