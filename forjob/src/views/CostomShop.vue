@@ -89,7 +89,7 @@
                         <span>現在只要$NT {{items.price | currency}}元</span>
                       </div>
                       <div class="align-self-end mt-3">
-                        <button class="text-end" @click.prevent="GetProductOne(items.id)">詳細內容</button>
+                        <button class="text-end" @click.prevent="GetProductOnce(items.id)">詳細內容</button>
                       </div>
                     </div>
                   </div>
@@ -212,39 +212,41 @@ export default {
         { name: "恐虐之刃", zoe: "BladesOfKhorne", title: "i", checked: false },
         { name: "混沌野獸人", zoe: "BeastsOfChaos", title: "j", checked: false }
       ],
-      products: [],
-      productone: {},
+      // products: [],
+      // productone: {},
       currentPage: 0,
       checkedNames: [],
-      status: {
-        loadingItem: ""
-      }
+      // status: {
+      //   loadingItem: ""
+      // }
     };
   },
   methods: {
-    GetProducts() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/products/all`;
-      console.log(api);
-      vm.$store.dispatch("isLoad", true);
-      vm.$http.get(api).then(response => {
-        vm.$store.dispatch("isLoad", false);
-        vm.products = response.data.products;
-      });
+    GetProductsAJAX() {
+      // const vm = this;
+      // const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/products/all`;
+      // console.log(api);
+      // vm.$store.dispatch("isLoad", true);
+      // vm.$http.get(api).then(response => {
+      //   vm.$store.dispatch("isLoad", false);
+      //   vm.products = response.data.products;
+      // });
+      this.$store.dispatch('GetProducts')
     },
-    GetProductOne(item) {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/product/${item}`;
-      console.log(api);
-      vm.$store.dispatch("isLoad", true);
-      vm.status.loadingItem = item;
-      console.log(vm.status.loadingItem);
-      vm.$http.get(api).then(response => {
-        $("#ProductModel").modal("show");
-        vm.productone = response.data.product;
-        vm.status.loadingItem = "";
-        vm.$store.dispatch("isLoad", false);
-      });
+    GetProductOnce(item) {
+      // const vm = this;
+      // const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/product/${item}`;
+      // console.log(api);
+      // vm.$store.dispatch("isLoad", true);
+      // vm.status.loadingItem = item;
+      // console.log(vm.status.loadingItem);
+      // vm.$http.get(api).then(response => { 
+      //  $('#ProductModel').modal('show')
+      //   vm.productone = response.data.product;
+      //   vm.status.loadingItem = "";
+      //   vm.$store.dispatch("isLoad", false);
+      // });
+      this.$store.dispatch('GetProductOne',item)
     },
     DwrapDown(event) {
       let e = event.target.dataset.rol;
@@ -266,6 +268,12 @@ export default {
   computed: {
     isLoading() {
       return this.$store.state.isLoading;
+    },
+    productone(){
+      return this.$store.state.productone;
+    },
+    status(){
+      return this.$store.state.status.loadingItem;
     },
     filterData() {
       let array = [
@@ -291,7 +299,7 @@ export default {
               return g.title.indexOf(i) != -1;
             }
             if (filters.some(cardContainsFilter)) {
-              vm.products.forEach((item, i) => {
+              vm.$store.state.products.forEach((item) => {
                 if (item.category === g.zoe) {
                   activeCard.push(item);
                 }
@@ -300,7 +308,7 @@ export default {
           });
         });
       } else {
-        activeCard = vm.products;
+        activeCard = vm.$store.state.products;
       }
       activeCard.forEach((item, i) => {
         if (i % 8 === 0) {
@@ -316,9 +324,10 @@ export default {
     $("#OrderSide").hide();
     $("#DeathSide").hide();
     $("#ChaosSide").hide();
+    console.log(this.productone.num)
   },
   created() {
-    this.GetProducts();
+    this.GetProductsAJAX();
   }
 };
 </script>
