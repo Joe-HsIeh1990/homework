@@ -1,4 +1,4 @@
-// navbar
+//----------------------navbar component
 #navbarNav a {
   text-decoration-line: none;
 }
@@ -6,7 +6,7 @@
   max-width: 80px;
   max-height: 80px;
 }
-//aboutus
+//----------------------aboutus pages
 #abc {
   background-color: rgba(0, 0, 0, 0.8);
 }
@@ -70,7 +70,7 @@
     margin-bottom: 140px;
   }
 }
-//index
+//----------------------index pages
 #timestory p,
 h1,
 h3,
@@ -199,27 +199,6 @@ li {
   border: 2px outset rgb(61, 61, 61);
   border-radius: 5px;
 }
-/* txt-move */
-.txt-right{
-  position: relative;
-}
-.txt-right h4{
-  position: absolute;
-  animation: txtr 3s 1  ;
-}
-.txt-right p{
-  position: absolute;
-}
-
-@keyframes txtr{
-  from{
-    right:0;
-  }
-  to{
-    left: 50%;
-  }
-}
-
 /* time line */
 .time-line {
   position: relative;
@@ -234,6 +213,7 @@ li {
   top: 0;
   right: 50%;
   bottom: 0;
+  animation: line 4s 1 ;
 }
 .time-line-red {
   position: relative;
@@ -248,6 +228,7 @@ li {
   top: 0;
   right: 50%;
   bottom: 0;
+  animation: line 4s 1 ;
 }
 .time-line-blue {
   position: relative;
@@ -262,17 +243,10 @@ li {
   top: 0;
   right: 50%;
   bottom: 0;
-  animation: line 3s 1 ;
 }
-@keyframes line{
-  from{
-    opacity: 0;
-  }
-  to{
-    opacity: 1;
-  }
 
-}
+
+
 
 //-------------------咱是分隔線----------------------//
 

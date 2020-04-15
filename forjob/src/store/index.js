@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     logShow: false,
     isLoading:false,
-    shopshow: false
+    shopshow: false,
+
   },
   mutations: {
     LOGSHOWED(state, payload){

@@ -102,7 +102,6 @@ export default {
       $("#slider").slick({
         autoplay: true,
         autoplaySpeed: 3000,
-        dots: true,
         fade: true,
         speed: 3000,
         responsive: [
@@ -111,7 +110,6 @@ export default {
             settings: {
               autoplay: true,
               autoplaySpeed: 3000,
-              dots: true,
               fade: true,
               speed: 3000
             }

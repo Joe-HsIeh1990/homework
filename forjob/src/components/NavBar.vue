@@ -49,9 +49,8 @@ export default {
     };
   },
   methods: {
-    LoginCreate() {
-      let vm = this;
-      vm.$store.dispatch("updatelog", true);
+    LoginCreate(e) {
+      this.$store.commit('LOGSHOWED' , true);
       
     }
   },
