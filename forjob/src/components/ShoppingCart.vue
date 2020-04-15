@@ -1,9 +1,9 @@
 <template>
   <div
     class="modal fade"
-    id="makemodal"
-    :key="logshowit"
+    id="costomtakemodal"
     tabindex="-1"
+    :key="shopcartshow"
     role="dialog"
     aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true"
@@ -16,7 +16,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">55667</div>
+        <div class="modal-body">123</div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Save changes</button>
@@ -25,19 +25,17 @@
     </div>
   </div>
 </template>
+
 <script>
 import $ from "jquery";
 export default {
-  data() {
-    return {};
-  },
   computed: {
-    logshowit() {
+    shopcartshow() {
       let vm = this;
-      let status = this.$store.state.logShow;
+      let status = this.$store.state.shopshow;
       if (status === true) {
-        $("#makemodal").modal("show");
-        vm.$store.commit("LOGSHOWED", false);
+        $("#costomtakemodal").modal("show");
+        vm.$store.commit("SHOPSHOW", false);
       }
       return status;
     }

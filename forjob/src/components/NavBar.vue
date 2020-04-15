@@ -49,9 +49,8 @@ export default {
     };
   },
   methods: {
-    LoginCreate(e) {
-      this.$store.commit('LOGSHOWED' , true);
-      
+    LoginCreate() {
+      this.$store.commit('LOGSHOWED' , true); 
     }
   },
   computed: {},
