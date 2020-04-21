@@ -155,7 +155,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-dark btn-lg">確認加入購物車</button>
+            <button type="button" class="btn btn-dark btn-lg" @click.prevent="addtoCart()">確認加入購物車</button>
           </div>
         </div>
       </div>
@@ -216,18 +216,21 @@ export default {
       // products: [],
       // productone: {},
       currentPage: 0,
-      checkedNames: [],
+      checkedNames: []
       // status: {
       //   loadingItem: ""
       // }
     };
   },
   methods: {
+    addtoCart(id, qty = 1) {
+     this.$store.dispatch('addtoCart' , {id , qty})
+    },
     GetProductsAJAX() {
-      this.$store.dispatch('GetProducts')
+      this.$store.dispatch("GetProducts");
     },
     GetProductOnce(item) {
-      this.$store.dispatch('GetProductOne',item)
+      this.$store.dispatch("GetProductOne", item);
     },
     DwrapDown(event) {
       let e = event.target.dataset.rol;
@@ -247,21 +250,21 @@ export default {
     }
   },
   computed: {
-    modalshowit(){
+    modalshowit() {
       let vm = this;
       let show = vm.$store.state.productshow;
-      if(show === true){
-        $('#ProductModel').modal('show')
-        vm.$store.dispatch('productshowit',false)
-      };
+      if (show === true) {
+        $("#ProductModel").modal("show");
+        vm.$store.dispatch("productshowit", false);
+      }
     },
     isLoading() {
       return this.$store.state.isLoading;
     },
-    productone(){
+    productone() {
       return this.$store.state.productone;
     },
-    status(){
+    status() {
       return this.$store.state.status.loadingItem;
     },
     filterData() {
@@ -287,9 +290,9 @@ export default {
             function cardContainsFilter(i) {
               return g.title.indexOf(i) != -1;
             }
-            console.log(cardContainsFilter)
+            console.log(cardContainsFilter);
             if (filters.some(cardContainsFilter)) {
-              vm.$store.state.products.forEach((item) => {
+              vm.$store.state.products.forEach(item => {
                 if (item.category === g.zoe) {
                   activeCard.push(item);
                 }
@@ -314,7 +317,7 @@ export default {
     $("#OrderSide").hide();
     $("#DeathSide").hide();
     $("#ChaosSide").hide();
-    console.log(this.productone.num)
+    console.log(this.productone.num);
   },
   created() {
     this.GetProductsAJAX();

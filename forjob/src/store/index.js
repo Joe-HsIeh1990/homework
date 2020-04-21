@@ -6,94 +6,114 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  strict:true,
+  strict: true,
   state: {
     logShow: false,
-    isLoading:false,
+    isLoading: false,
     shopshow: false,
-    cart:{},
+    cart: {},
     products: [],
-    productone: {},   
+    productone: {},
     status: {
       loadingItem: ""
     },
-    productshow:false
+    productshow: false
   },
   mutations: {
-    PROUCTSSHOW(state, payload){
+    PROUCTSSHOW(state, payload) {
       state.productshow = payload;
     },
-    LOGSHOWED(state, payload){
+    LOGSHOWED(state, payload) {
       state.logShow = payload;
     },
-    SHOPSHOW(state, payload){
+    SHOPSHOW(state, payload) {
       state.shopshow = payload;
     },
-    ISLOADING(state, payload){
+    ISLOADING(state, payload) {
       state.isLoading = payload;
     },
-    CART(state, payload){
+    CART(state, payload) {
       state.cart = payload;
     },
-    PRODUCTS(state, payload){
+    PRODUCTS(state, payload) {
       state.products = payload;
     },
-    PRODUCTSONE(state, payload){
+    PRODUCTSONE(state, payload) {
       state.productone = payload;
     },
-    STATUS(state, payload){
+    STATUS(state, payload) {
       state.status.loadingItem = payload
     }
- 
+
   },
   actions: {
-    productshowit(context , payload){
+    productshowit(context, payload) {
       context.commit('PROUCTSSHOW', payload)
     },
-    
-    updatelog(context , payload){
+
+    updatelog(context, payload) {
       context.commit('LOGSHOWED', payload)
     },
-    isLoad(context , payload){
+    isLoad(context, payload) {
       context.commit('ISLOADING', payload)
     },
-    showshop(context , payload){
+    showshop(context, payload) {
       context.commit('SHOPSHOW', payload)
     },
     GetProducts(context) {
       const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/products/all`;
-      context.commit('ISLOADING',true)
+      context.commit('ISLOADING', true)
       axios.get(api).then(response => {
         context.commit('PRODUCTS', response.data.products)
-        context.commit('ISLOADING',false)
+        context.commit('ISLOADING', false)
       });
     },
-    GetProductOne(context , item) {
+    GetProductOne(context, item) {
       const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/product/${item}`;
-      context.commit('ISLOADING',true);
+      context.commit('ISLOADING', true);
       context.commit('STATUS', item);
       axios.get(api).then(response => {
-        if(response.data.success){
-          context.commit('PROUCTSSHOW',true)
+        if (response.data.success) {
+          context.commit('PROUCTSSHOW', true)
         }
-        context.commit('PRODUCTSONE',response.data.product);  
+        context.commit('PRODUCTSONE', response.data.product);
         context.commit('STATUS', "")
-        context.commit('ISLOADING',false)
+        context.commit('ISLOADING', false)
       });
     },
     getCart(context) {
-      const api = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      context.commit('ISLOADING',true)
+      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/cart`;
+      context.commit(('ISLOADING', true))
       axios.get(api).then(response => {
         context.commit('CART', response.data.data)
-        context.commit('ISLOADING',false)
+        context.commit(('ISLOADING', false))
+      });
+    },
+    addtoCart(context, { id, qty }) {
+      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/cart`;
+      context.commit('STATUS', id);
+      const cart = {
+        product_id: id,
+        qty
+      };
+      axios.post(api, { data: cart }).then(response => {
+        context.commit('STATUS', "");
+        context.dispatch('getCart')
+      });
+    },
+    removeCart(context, id) {
+      const api = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart/${id}`;
+      context.commit('ISLOADING', true)
+      axios.delete(api).then(response => {
+        context.dispatch('getcart')
+
       });
     }
   },
-  getters:{
+  getters: {
 
   },
   modules: {
-    
+
   }
 })
