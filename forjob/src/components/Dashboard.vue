@@ -15,7 +15,7 @@
           <i class="fas fa-cart-arrow-down fa-2x text-light mr-1"></i>
         </div>
         <Login />
-        <!-- <ShoppingCart /> -->
+        <ShoppingCart />
       </div>
     </div>
   </div>
@@ -24,12 +24,12 @@
 import $ from "jquery";
 import NavBar from "./NavBar";
 import Login from "./Login";
-// import ShoppingCart from "./ShoppingCart"
+import ShoppingCart from "./ShoppingCart"
 export default {
   components: {
     NavBar,
     Login,
-    // ShoppingCart
+    ShoppingCart
   },
   data() {
     return {};
@@ -37,7 +37,7 @@ export default {
   methods: {
     //open costomshop modal
     ShowShop() {
-     this.$store.commit('SHOPSHOW' , true)
+     this.$store.dispatch('showshop' , true)
     }
   },
   mounted(){

@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     LoginCreate() {
-      this.$store.commit('LOGSHOWED' , true); 
+      this.$store.dispatch('updatelog' , true); 
     }
   },
   computed: {},

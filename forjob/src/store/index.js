@@ -16,9 +16,13 @@ export default new Vuex.Store({
     productone: {},   
     status: {
       loadingItem: ""
-    }
+    },
+    productshow:false
   },
   mutations: {
+    PROUCTSSHOW(state, payload){
+      state.productshow = payload;
+    },
     LOGSHOWED(state, payload){
       state.logShow = payload;
     },
@@ -43,6 +47,10 @@ export default new Vuex.Store({
  
   },
   actions: {
+    productshowit(context , payload){
+      context.commit('PROUCTSSHOW', payload)
+    },
+    
     updatelog(context , payload){
       context.commit('LOGSHOWED', payload)
     },
@@ -62,10 +70,13 @@ export default new Vuex.Store({
     },
     GetProductOne(context , item) {
       const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/product/${item}`;
-      context.commit('ISLOADING',true)
-      context.commit('STATUS', item)
+      context.commit('ISLOADING',true);
+      context.commit('STATUS', item);
       axios.get(api).then(response => {
-        context.commit('PRODUCTSONE',response.data.product);   
+        if(response.data.success){
+          context.commit('PROUCTSSHOW',true)
+        }
+        context.commit('PRODUCTSONE',response.data.product);  
         context.commit('STATUS', "")
         context.commit('ISLOADING',false)
       });

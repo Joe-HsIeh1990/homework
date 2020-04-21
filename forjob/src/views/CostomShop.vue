@@ -115,6 +115,7 @@
     <div
       class="modal fade"
       id="ProductModel"
+      :showmodal="modalshowit"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalCenterTitle"
@@ -123,7 +124,7 @@
       <div class="modal-dialog modal-dialog-centered modal-lg madal-md-sm" role="document">
         <div class="modal-content">
           <div class="modal-header bg-dark">
-            <h5 class="modal-title" id="exampleModalCenterTitle">商品內容</h5>
+            <h5 class="modal-title text-white" id="exampleModalCenterTitle">商品內容</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true" class="text-white">&times;</span>
             </button>
@@ -223,29 +224,9 @@ export default {
   },
   methods: {
     GetProductsAJAX() {
-      // const vm = this;
-      // const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/products/all`;
-      // console.log(api);
-      // vm.$store.dispatch("isLoad", true);
-      // vm.$http.get(api).then(response => {
-      //   vm.$store.dispatch("isLoad", false);
-      //   vm.products = response.data.products;
-      // });
       this.$store.dispatch('GetProducts')
     },
     GetProductOnce(item) {
-      // const vm = this;
-      // const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/product/${item}`;
-      // console.log(api);
-      // vm.$store.dispatch("isLoad", true);
-      // vm.status.loadingItem = item;
-      // console.log(vm.status.loadingItem);
-      // vm.$http.get(api).then(response => { 
-      //  $('#ProductModel').modal('show')
-      //   vm.productone = response.data.product;
-      //   vm.status.loadingItem = "";
-      //   vm.$store.dispatch("isLoad", false);
-      // });
       this.$store.dispatch('GetProductOne',item)
     },
     DwrapDown(event) {
@@ -266,6 +247,14 @@ export default {
     }
   },
   computed: {
+    modalshowit(){
+      let vm = this;
+      let show = vm.$store.state.productshow;
+      if(show === true){
+        $('#ProductModel').modal('show')
+        vm.$store.dispatch('productshowit',false)
+      };
+    },
     isLoading() {
       return this.$store.state.isLoading;
     },
@@ -298,6 +287,7 @@ export default {
             function cardContainsFilter(i) {
               return g.title.indexOf(i) != -1;
             }
+            console.log(cardContainsFilter)
             if (filters.some(cardContainsFilter)) {
               vm.$store.state.products.forEach((item) => {
                 if (item.category === g.zoe) {

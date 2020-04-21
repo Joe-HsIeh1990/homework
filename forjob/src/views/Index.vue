@@ -9,15 +9,24 @@
         </div>
       </div>
       <div class="my-3 d-flex justify-content-center container-md px-0" id="btn-flxed">
-        <select name="mod" class="d-flex d-md-none col-12" v-model="change" id="mod">
+        <select
+          name="mod"
+          class="d-flex d-md-none col-12"
+          v-model="change"
+          id="mod"
+          @click.prevent="optionChange()"
+        >
           <option value="a">神話時代</option>
           <option value="b">混沌時代</option>
           <option value="c">西格瑪時代</option>
         </select>
         <ul class="d-none d-md-flex flex-column flex-md-row text-center px-0 col-md-12" id="cop">
-          <li class="col-md-4 py-3 h4 rounded-left btn-css" @click.prevent="change = 'a'">神話時代</li>
-          <li class="col-md-4 py-3 h4 btn-css" @click.prevent="change = 'b'">混沌時代</li>
-          <li class="col-md-4 py-3 h4 rounded-right btn-css" @click.prevent="change = 'c'">西格瑪時代</li>
+          <li class="col-md-4 py-3 h4 rounded-left btn-css" @click.prevent="optionChange('a')">神話時代</li>
+          <li class="col-md-4 py-3 h4 btn-css" @click.prevent="optionChange('b')">混沌時代</li>
+          <li
+            class="col-md-4 py-3 h4 rounded-right btn-css"
+            @click.prevent="optionChange('c')"
+          >西格瑪時代</li>
         </ul>
       </div>
       <div class="container-md pt-2 pb-3" id="godtime" v-if="change === 'a'">
@@ -318,20 +327,23 @@ export default {
     };
   },
   methods: {
-    optionChange(e) {
+    optionChange(item) {
       let select = document.getElementById("mod").value;
       let vm = this;
-      if (select === "a") {
-        let god = document.getElementById("godtime");
+      let god = $('#godtime').offset().top;
+      if (item === "a") {
         vm.change = "a";
-        $("body,html").animate({
-          scrollTop: god
-        });
-        e.preventDefault();
-      } else if (select === "b") {
+        $("html,body").animate({ scrollTop: 440 }, 1500);
+        // $("html,body").animate({ scrollTop: god }, 1500);
+      } else if (item === "b") {
         vm.change = "b";
-      } else if (select === "c") {
+        $("html,body").animate({ scrollTop: 440 }, 1500);
+      } else if (item === "c") {
         vm.change = "c";
+        $("html,body").animate({ scrollTop: 440 }, 1500);
+      }
+      if (select == vm.change) {
+        $("html,body").animate({ scrollTop: 300 }, 1500);
       }
     }
   },
