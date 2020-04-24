@@ -11,15 +11,26 @@ import 'bootstrap';
 import currencyFilter from './filters/currency';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { ValidationProvider, extend } from 'vee-validate';
+import { localize } from 'vee-validate';
+import TW from 'vee-validate/dist/locale/zh_TW.json';
+import './bus';
 
-
-
+localize('zh_TW', TW)
+Vue.component('ValidationProvider', ValidationProvider);
 axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 Vue.component('Loading', Loading);
 Vue.use(Vuex);
 Vue.filter('currency', currencyFilter);
+//vee-validate
+extend('secret', {
+  validate: value => value === 'example',
+  message: 'This is not the magic word'
+});
+
+// Register
 new Vue({
   created() {
     AOS.init(

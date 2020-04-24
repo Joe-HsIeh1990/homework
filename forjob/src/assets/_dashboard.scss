@@ -1,3 +1,11 @@
+*{
+  
+
+    outline: none;
+  }
+:focus,input::-moz-focus-inner, button::-moz-focus-inner{
+    outline: 0;
+ }
 //----------------------navbar component
 #navbarNav a {
   text-decoration-line: none;
@@ -251,6 +259,12 @@ li {
 //-------------------咱是分隔線----------------------//
 
 
-
+.modal-open {
+  overflow-y: scroll;
+  padding-right: 0 !important;
+}
+button{
+  outline:none;
+  }
 
 //Dashboard

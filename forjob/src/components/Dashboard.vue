@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavBar />
+    <Alert />
     <div class="container-fluid">
       <div class="row">
         <main
@@ -24,12 +25,14 @@
 import $ from "jquery";
 import NavBar from "./NavBar";
 import Login from "./Login";
-import ShoppingCart from "./ShoppingCart"
+import ShoppingCart from "./ShoppingCart";
+import Alert from './Alert'
 export default {
   components: {
     NavBar,
     Login,
-    ShoppingCart
+    ShoppingCart,
+    Alert
   },
   data() {
     return {};

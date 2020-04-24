@@ -24,7 +24,12 @@ const routes = [
         path: 'costomshop',
         name: 'CostomShop',
         component: () => import('../views/CostomShop')
-      }
+      },
+      // {
+      //   path: 'costompagge',
+      //   name: 'CostomPagge',
+      //   component: () => import('../components/CostomPagge')
+      // }
     ]
   },
   {
@@ -38,6 +43,11 @@ const routes = [
           name: 'AdminShop',
           component: () => import('../views/AdminShop')
         },
+        {
+          path:'adminorder',
+          name:'AdminOrder',
+          component: () => import('../views/AdminOrder')
+        }
       ]
   },
  

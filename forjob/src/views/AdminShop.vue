@@ -37,7 +37,7 @@
     </table>
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-        <li class="page-item" :class="{'disabled': !pagination.has_pre}">
+        <li class="page-item" v-if="pagination.has_pre">
           <!--上一頁-->
           <a
             class="page-link"
@@ -54,10 +54,9 @@
           :key="page"
           :class="{'active':pagination.current_page === page}"
         >
-          <!--這邊套入v-for 並且帶入pagination.total_pages(pagination.total_pages為檢視頁面內的 數值) 並且綁定class 去設置同步化pagination -->
           <a class="page-link" href="#" @click.prevent="getProducts(page)">{{ page }}</a>
         </li>
-        <li class="page-item" :class="{'disabled': !pagination.has_next}">
+        <li class="page-item" v-if="pagination.has_next">
           <!--下一頁-->
           <a
             class="page-link"

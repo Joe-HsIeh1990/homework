@@ -2,7 +2,7 @@
   <div>
     <div class="container-md px-3 py-2 mt-5" id="abc">
       <div
-        class="row text-center text-light justify-content-center align-items-center"
+        class="row text-center text-light justify-content-center align-items-center my-3"
         id="abc-title"
       >
         <div class="col-md-2">

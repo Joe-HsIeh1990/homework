@@ -330,11 +330,9 @@ export default {
     optionChange(item) {
       let select = document.getElementById("mod").value;
       let vm = this;
-      let god = $('#godtime').offset().top;
       if (item === "a") {
         vm.change = "a";
         $("html,body").animate({ scrollTop: 440 }, 1500);
-        // $("html,body").animate({ scrollTop: god }, 1500);
       } else if (item === "b") {
         vm.change = "b";
         $("html,body").animate({ scrollTop: 440 }, 1500);

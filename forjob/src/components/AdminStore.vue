@@ -18,10 +18,12 @@
           </router-link>
         </ul>
         <ul class="nav flex-md-column mb-5">
-          <li class="nav-item text-center">
-            <i class="fas fa-box-open"></i>
-            訂單列表
-          </li>
+          <router-link to="/administrator/adminorder">
+            <li class="nav-item text-center">
+              <i class="fas fa-box-open"></i>
+              訂單列表
+            </li>
+          </router-link>
         </ul>
         <ul class="nav flex-md-column mb-5">
           <li class="nav-item text-center">
@@ -58,7 +60,7 @@ export default {
           vm.$router.push("/aboutus");
         }
       });
-    },
+    }
   },
   computed: {
     RWDside() {
@@ -73,12 +75,9 @@ export default {
         return (vm.bo = true);
         console.log(vm.bo);
       }
-
-
     }
   },
-  mounted() {
-  },
+  mounted() {}
 };
 </script>
 

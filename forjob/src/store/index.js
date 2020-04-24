@@ -6,7 +6,7 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  strict: true,
+  // strict: true,
   state: {
     logShow: false,
     isLoading: false,
@@ -17,9 +17,13 @@ export default new Vuex.Store({
     status: {
       loadingItem: ""
     },
-    productshow: false
+    productshow: false,
+    // messages: [],
   },
   mutations: {
+    // MESSAGES(state, payload) {
+    //   state.messages = payload;
+    // },
     PROUCTSSHOW(state, payload) {
       state.productshow = payload;
     },
@@ -32,7 +36,7 @@ export default new Vuex.Store({
     ISLOADING(state, payload) {
       state.isLoading = payload;
     },
-    CART(state, payload) {
+    CARTS(state, payload) {
       state.cart = payload;
     },
     PRODUCTS(state, payload) {
@@ -74,43 +78,59 @@ export default new Vuex.Store({
       context.commit('STATUS', item);
       axios.get(api).then(response => {
         if (response.data.success) {
-          context.commit('PROUCTSSHOW', true)
+          context.commit('PROUCTSSHOW', true);
         }
         context.commit('PRODUCTSONE', response.data.product);
-        context.commit('STATUS', "")
+        context.commit('STATUS', "");
         context.commit('ISLOADING', false)
       });
     },
     getCart(context) {
       const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/cart`;
-      context.commit(('ISLOADING', true))
+      context.commit('ISLOADING', true)
       axios.get(api).then(response => {
-        context.commit('CART', response.data.data)
-        context.commit(('ISLOADING', false))
+        context.commit('CARTS', response.data.data)
+        console.log(response)
+        context.commit('ISLOADING', false)
       });
     },
     addtoCart(context, { id, qty }) {
       const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/cart`;
       context.commit('STATUS', id);
-      const cart = {
+      let cart = {
         product_id: id,
         qty
-      };
+      }; 
       axios.post(api, { data: cart }).then(response => {
+        if (response.data.sucess) {
+          context.commit('PROUCTSSHOW', false)
+        }
         context.commit('STATUS', "");
         context.dispatch('getCart')
       });
     },
     removeCart(context, id) {
-      const api = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart/${id}`;
+      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/cart/${id}`;
       context.commit('ISLOADING', true)
       axios.delete(api).then(response => {
-        context.dispatch('getcart')
-
+        context.dispatch('getCart');
+        context.commit('ISLOADING', false);
       });
     }
   },
   getters: {
+    products(state) {
+      return state.products;
+    },
+    isLoading(state) {
+      return state.isLoading;
+    },
+    productone(state) {
+      return state.productone;
+    },
+    status(state) {
+      return state.status.loadingItem;
+    },
 
   },
   modules: {

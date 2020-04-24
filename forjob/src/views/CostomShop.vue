@@ -67,15 +67,16 @@
             <div class="line-of-item"></div>
             <div class="d-flex my-4 justify-content-center col-12">
               <loading :active.sync="isLoading"></loading>
+              <!-- cart -->
               <div class="d-flex flex-wrap justify-content-center">
                 <div
-                  class="card my-2 mx-1"
+                  class="card my-2 mx-1 cart-shadow"
                   style="width:251px;"
                   v-for="items in filterData[currentPage]"
                   :data-rou="items.category"
                   :key="items.id"
                 >
-                  <img :src="items.imageUrl" class="card-img-top img-fluid" alt="..." />
+                  <img :src="items.imageUrl" class="card-img-top img-fluid" alt="..." /> 
                   <div class="card-body border-top border-dark bg-dark">
                     <div>
                       <p class="card-text">{{items.title}}</p>
@@ -146,7 +147,7 @@
               <div class="mb-2">{{productone.category}}</div>
               <div>售價:</div>
               <div class="mb-3">{{productone.price | currency}}元</div>
-              <select name="numberitem" id="selectnum" v-model="productone.is_enabled" c>
+              <select name="numberitem" id="selectnum" v-model="productone.is_enabled">
                 <option :value="num" v-for="num in  10" :key="num">選購: {{num}} {{productone.unit}}</option>
               </select>
               <div class="mt-3">小計總額:</div>
@@ -155,7 +156,11 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-dark btn-lg" @click.prevent="addtoCart()">確認加入購物車</button>
+            <button
+              type="button"
+              class="btn btn-dark btn-lg"
+              @click.prevent="addtoCart(productone.id , productone.is_enabled)"
+            >確認加入購物車</button>
           </div>
         </div>
       </div>
@@ -163,6 +168,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import $ from "jquery";
 export default {
   data() {
@@ -213,18 +219,14 @@ export default {
         { name: "恐虐之刃", zoe: "BladesOfKhorne", title: "i", checked: false },
         { name: "混沌野獸人", zoe: "BeastsOfChaos", title: "j", checked: false }
       ],
-      // products: [],
-      // productone: {},
       currentPage: 0,
       checkedNames: []
-      // status: {
-      //   loadingItem: ""
-      // }
     };
   },
   methods: {
     addtoCart(id, qty = 1) {
-     this.$store.dispatch('addtoCart' , {id , qty})
+      this.$store.dispatch("addtoCart", { id, qty });
+      $("#ProductModel").modal("hide");
     },
     GetProductsAJAX() {
       this.$store.dispatch("GetProducts");
@@ -258,15 +260,19 @@ export default {
         vm.$store.dispatch("productshowit", false);
       }
     },
-    isLoading() {
-      return this.$store.state.isLoading;
-    },
-    productone() {
-      return this.$store.state.productone;
-    },
-    status() {
-      return this.$store.state.status.loadingItem;
-    },
+    ...mapGetters(["products", "isLoading", "productone", "status"]),
+    // products() {
+    //   return this.$store.state.products;
+    // },
+    // isLoading() {
+    //   return this.$store.state.isLoading;
+    // },
+    // productone() {
+    //   return this.$store.state.productone;
+    // },
+    // status() {
+    //   return this.$store.state.status.loadingItem;
+    // },
     filterData() {
       let array = [
         {
@@ -368,5 +374,8 @@ input {
 #items-here {
   background: #eee;
   width: 95%;
+}
+.cart-shadow {
+  box-shadow: 2px 2px 2px #000;
 }
 </style>
