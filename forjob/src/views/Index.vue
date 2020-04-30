@@ -213,29 +213,29 @@
             class="d-flex flex-md-row flex-column justify-content-md-between justify-content-center align-items-center"
           >
             <div class="d-flex align-items-center col-md-6 col-12">
-              <div class="col-md-12">
+              <div class="col-md-12" data-aos="zoom-in">
                 <img src="../assets/images/05TrulyExcel1.png" class="img-fluid" alt />
               </div>
             </div>
             <div class="d-flex row flex-column col-md-6 col-12">
-              <div class="d-none d-md-flex time-line-blue">
+              <div class="d-none d-md-flex time-line-blue" data-aos="fade-down">
                 <span></span>
               </div>
-              <div class="my-4">
+              <div class="my-4" data-aos="fade-left">
                 <h4>污濁之潮</h4>
                 <p>布萊姆達爾綠色峽谷的據點被納垢的瘟疫軍團入侵，他們尋找艾麗瑞拉隱藏的避難所。由一個三巨獸的劈路下，不潔者的大軍威脅要污染整個水下堡壘。由海精靈之王浮特諾斯領導的大軍提供了及時的援軍，他們自己追捕並殺死了三巨獸。由於潮汐技術的魔力，污物很快就被沖走了。戰鬥結束後，浮特諾斯尋找樹妖女王，希望彌補她與海精靈之間的裂痕。然而艾麗瑞拉擔心混亂大軍的陷阱，仍然處於隱居狀態。</p>
               </div>
-              <div class="time-line-blue">
+              <div class="time-line-blue" data-aos="fade-down">
                 <span></span>
               </div>
-              <div class="my-4">
+              <div class="my-4" data-aos="fade-left">
                 <h4>綠巨獸的聚集</h4>
                 <p>橫跨浩瀚的獸界，據說，鐵下巴綠巨人-戈德拉克，老大中的老大，正像食人魔堆砌殘骨般地一樣堆起勝利，戈德拉克一路凱旋！粉碎混沌領主的瘟疫大軍。他聽到了傳說中的偉大的法納特拉克的謠言，野獸之域的界門將領他向所有八大節點，鐵下巴綠巨人戈德拉克即刻啟程。</p>
               </div>
-              <div class="time-line-blue">
+              <div class="time-line-blue" data-aos="fade-down">
                 <span></span>
               </div>
-              <div class="my-4">
+              <div class="my-4" data-aos="fade-left">
                 <h4>只留塵埃</h4>
                 <p>西格瑪的使節橫跨螺旋關節尋找矮人， 希望能夠重建古老的聯盟他們可能會贏得一個重要的在內部最大的灘頭島嶼。 雖然他們與他們一路戰鬥中經過許多古老的矮人山峰，但是屍體和長期被遺棄帝國的迴聲。</p>
               </div>
@@ -247,28 +247,28 @@
             class="d-flex justify-content-md-between flex-md-row flex-column-reverse align-items-center justify-content-center"
           >
             <div class="d-flex d-md-row flex-column col-md-6 col-12">
-              <div class="my-4">
+              <div class="my-4" data-aos="fade-right">
                 <h4>堅守艾茲爾之門</h4>
                 <p>界門之戰已經開始。通過堅守住眾多進入艾茲爾的大門，雷鑄神兵的先鋒已經打開了西格瑪復仇的閘門，為西格瑪的更大的戰役鋪平了道路。在這樣做的同時，他們嚴厲打擊了混沌的統治，粉碎了扼殺了凡人自由和希望的束縛。</p>
               </div>
-              <div class="time-line-blue">
+              <div class="time-line-blue" data-aos="fade-down">
                 <span></span>
               </div>
 
-              <div class="my-4">
+              <div class="my-4" data-aos="fade-right">
                 <h4>希望</h4>
                 <p>隨著西格瑪風暴的來臨，樹海靈木找到了新的盟友。從荊棘棲地到木瘤尖塔，樹海靈木與雷鑄神兵攜手作戰。與此同時，在紀倫，藤蔓女士幫助雷鑄天軍從她的心材當中，找到了伴隨著希望的埃瑟沃德，然而他們對即將到來的事情知之甚少。</p>
               </div>
-              <div class="time-line-blue">
+              <div class="time-line-blue" data-aos="fade-down">
                 <span></span>
               </div>
-              <div class="my-4">
+              <div class="my-4" data-aos="fade-right">
                 <h4>重奪聖錘</h4>
                 <p>在金屬之域，沉睡著一個巨大的秘密-聖錘：蓋爾馬拉茲。在愛爾德里奇要塞神王集結了大量的軍團突襲了姦奇的奴僕以重奪他的戰鎚。最終掌錘者梵督斯，西格瑪之鎚天界領主將傳奇的碎顱者帶回了艾茲爾。</p>
               </div>
             </div>
             <div class="d-flex align-items-md-center col-md-6 col-12">
-              <div class="col-md-12">
+              <div class="col-md-12" data-aos="zoom-in">
                 <img src="../assets/images/3.1-timeline-resized-1.png" class="img-fluid" alt />
               </div>
             </div>
@@ -279,7 +279,7 @@
             class="d-flex flex-md-row flex-column justify-content-md-between justify-content-center align-items-center"
           >
             <div class="d-flex align-items-center col-md-6 col-12 mb-4">
-              <div class="col-md-12">
+              <div class="col-md-12" data-aos="zoom-in">
                 <img
                   src="../assets/images/realm_of_life_by_akimblya-da9rcvk-e1528910942222.jpg"
                   class="img-fluid"
@@ -288,24 +288,24 @@
               </div>
             </div>
             <div class="d-flex row flex-column col-md-6 col-12">
-              <div class="d-none d-md-flex time-line-blue">
+              <div class="d-none d-md-flex time-line-blue" data-aos="fade-down">
                 <span></span>
               </div>
-              <div class="my-4">
+              <div class="my-4"  data-aos="fade-left">
                 <h4>埃瑟沃德的腐敗</h4>
                 <p>在王都，整個王國的靈魂爭奪戰激烈。從他神聖疾病的大鍋中，祖爾努爾格曾經沒有數字地掠奪了不善的禮物，玷污了除了最神聖的格瑞蘭的空間之外的所有東西，直到幾乎每一英畝的土地都生活在一片荒蕪中。在尋找永恆女王艾麗瑞拉時，聖殿騎士無意中將納垢的冠軍帶到了艾瑟沃德。生命之域最後的天堂在混沌籠罩的中落下了，閃耀林女王望隨之落幕。</p>
               </div>
-              <div class="time-line-blue">
+              <div class="time-line-blue" data-aos="fade-down">
                 <span></span>
               </div>
-              <div class="my-4">
+              <div class="my-4" data-aos="fade-left">
                 <h4>求援失敗</h4>
                 <p>雷鑄神兵使者們去到了海精靈的首府普淋姆，請求了的海精靈的援助。海精靈舉行了一場大會，儘管國王慷慨激昂，但許多海精靈棄權或投票反對任何此類聯盟。所以西格瑪雷鑄神兵在沒有提供的幫助的情況下開始了界門之戰。</p>
               </div>
-              <div class="time-line-blue">
+              <div class="time-line-blue" data-aos="fade-down">
                 <span></span>
               </div>
-              <div class="my-4">
+              <div class="my-4" data-aos="fade-left">
                 <h4>艾茲爾的複仇天使</h4>
                 <p>聖天尊收復戰鎚蓋爾.瑪拉茲之後，親臨戰場加入了西格瑪大軍與混沌戰爭的最前線。隨著一陣電閃雷鳴，聖天尊抵達了界門的戰場，對黑暗神的僕人們帶去了恐懼。西格瑪化身閃電般在那裡戰鬥，勝利不遠了。</p>
               </div>

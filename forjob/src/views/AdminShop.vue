@@ -275,9 +275,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/products?page=${page}`;
       const vm = this;
       vm.isLoading = true;
-      console.log(process.env.VUE_APP_APIPATH, process.env.VUE_APP_COSTOM );
       this.$http.get(api).then(response => {
-        console.log(response.data);
         vm.isLoading = false;
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;

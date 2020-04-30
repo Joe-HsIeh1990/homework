@@ -4,7 +4,7 @@
     <table class="table mt-4">
       <thead>
         <tr>
-          <th>購買時間</th>
+          <th>訂單編號</th>
           <th>Email</th>
           <th>購買款項</th>
           <th>應付金額</th>

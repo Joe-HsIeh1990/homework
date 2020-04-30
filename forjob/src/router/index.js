@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    redirect: '/aboutus',
     name: 'Dashboard',
     component: () => import('../components/Dashboard'),
     children: [

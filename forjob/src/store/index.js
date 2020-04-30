@@ -6,7 +6,7 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  // strict: true,
+  strict: true,
   state: {
     logShow: false,
     isLoading: false,
@@ -18,12 +18,8 @@ export default new Vuex.Store({
       loadingItem: ""
     },
     productshow: false,
-    // messages: [],
   },
   mutations: {
-    // MESSAGES(state, payload) {
-    //   state.messages = payload;
-    // },
     PROUCTSSHOW(state, payload) {
       state.productshow = payload;
     },
@@ -90,7 +86,6 @@ export default new Vuex.Store({
       context.commit('ISLOADING', true)
       axios.get(api).then(response => {
         context.commit('CARTS', response.data.data)
-        console.log(response)
         context.commit('ISLOADING', false)
       });
     },
@@ -103,7 +98,7 @@ export default new Vuex.Store({
       }; 
       axios.post(api, { data: cart }).then(response => {
         if (response.data.sucess) {
-          context.commit('PROUCTSSHOW', false)
+          context.commit('PROUCTSSHOW', false);
         }
         context.commit('STATUS', "");
         context.dispatch('getCart')
@@ -116,7 +111,7 @@ export default new Vuex.Store({
         context.dispatch('getCart');
         context.commit('ISLOADING', false);
       });
-    }
+    },
   },
   getters: {
     products(state) {

@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       wid: 0,
-      bo: true
+      rwdsideNav: true
     };
   },
   methods: {
@@ -69,11 +69,11 @@ export default {
       console.log(w);
       vm.wid = w;
       if (vm.wid < 768) {
-        return (vm.bo = false);
-        console.log(vm.bo);
+        return (vm.rwdsideNav = false);
+        console.log(vm.rwdsideNav);
       } else {
-        return (vm.bo = true);
-        console.log(vm.bo);
+        return (vm.rwdsideNav = true);
+        console.log(vm.rwdsideNav);
       }
     }
   },
@@ -87,8 +87,8 @@ export default {
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
+  z-index: 100; 
+  padding: 48px 0 0; 
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 .sidebar h6,

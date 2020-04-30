@@ -9,7 +9,9 @@
           class="row col-12 m-auto justify-content-center align-items-center"
           id="mind"
         >
-          <router-view></router-view>
+          <router-view>
+            1212
+          </router-view>
         </main>
         <!-- icon -->
         <div class="d-flex justify-content-center align-items-center" id="shoppagge" @click.prevent="ShowShop">

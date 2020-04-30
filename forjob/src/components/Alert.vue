@@ -10,7 +10,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: 'Navbar',
@@ -21,7 +20,7 @@ export default {
     };
   },
   methods: {
-    updateMessage({message, status}) {
+    updateMessage(message, status) {
       const timestamp = Math.floor(new Date() / 1000);
       this.messages.push({
         message,
@@ -29,11 +28,11 @@ export default {
         timestamp,
       });
       this.removeMessageWithTiming(timestamp);
-    // this.$store.dispatch('updateMessage',{message, status})
+      // this.$store.dispatch('updateMessage',{message, status})
     },
     removeMessage(num) {
       this.messages.splice(num, 1);
-    // this.$store.dispatch('removeMessage',num)
+      // this.$store.dispatch('removeMessage' , num)
     },
     removeMessageWithTiming(timestamp) {
       const vm = this;
@@ -44,20 +43,19 @@ export default {
           }
         });
       }, 5000);
-    // this.$store.dispatch('removeMessageWithTiming',timestamp)
+      // this.$store.dispatch('removeMessageWithTiming',timestamp)
     },
+  },
+  computed:{
+    messagesback(){
+      return this.$store.state.messages;
+    }
   },
   created() {
     const vm = this;
-    // this.updateMessage({message, status})
-
-    // 自定義名稱 'messsage:push'
-    // message: 傳入參數
-    // status: 樣式，預設值為 warning
     vm.$bus.$on('message:push', (message, status = 'warning') => {
       vm.updateMessage(message, status);
-    });//on為外層 後續要內層使用需要用$emit
-    // vm.$bus.$emit('message:push');
+    });
   },
 };
 </script>

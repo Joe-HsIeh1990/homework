@@ -261,18 +261,6 @@ export default {
       }
     },
     ...mapGetters(["products", "isLoading", "productone", "status"]),
-    // products() {
-    //   return this.$store.state.products;
-    // },
-    // isLoading() {
-    //   return this.$store.state.isLoading;
-    // },
-    // productone() {
-    //   return this.$store.state.productone;
-    // },
-    // status() {
-    //   return this.$store.state.status.loadingItem;
-    // },
     filterData() {
       let array = [
         {
@@ -323,7 +311,6 @@ export default {
     $("#OrderSide").hide();
     $("#DeathSide").hide();
     $("#ChaosSide").hide();
-    console.log(this.productone.num);
   },
   created() {
     this.GetProductsAJAX();
