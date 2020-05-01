@@ -47,8 +47,9 @@
                 placeholder="請輸入密碼"
               />
             </div>
-            <div class="d-flex">
-              <div class="mt-4 d-flex justify-content-end " style="width:236px;">
+            <div class="d-flex ">
+                <span class="text-danger mt-4  text-center" v-if="errorAdd">請輸入正確帳號密碼</span>
+              <div class="mt-4 d-flex justify-content-end" style="width:236px;">
                 <button type="button" class="btn btn-danger mr-2" data-dismiss="modal">取消</button>
                 <button class="btn btn-dark" type="submit">確認</button>
               </div>
@@ -67,7 +68,8 @@ export default {
       user: {
         username: "",
         password: ""
-      }
+      },
+      errorAdd: false
     };
   },
   methods: {
@@ -80,8 +82,12 @@ export default {
           if (vm.$store.state.logShow == false) {
             $("#makemodal").modal("hide");
           }
+          vm.errorAdd = false;
           vm.$store.dispatch("isLoad", false);
           vm.$router.push("/administrator");
+        } else {
+          vm.errorAdd = true;
+          vm.$store.dispatch("isLoad", false);
         }
       });
     }
@@ -97,8 +103,7 @@ export default {
     },
     isloading() {
       return this.$store.state.isLoading;
-    },
-
+    }
   }
 };
 </script>

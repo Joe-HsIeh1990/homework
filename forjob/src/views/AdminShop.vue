@@ -38,7 +38,6 @@
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item" v-if="pagination.has_pre">
-          <!--上一頁-->
           <a
             class="page-link"
             href="#"
@@ -57,7 +56,6 @@
           <a class="page-link" href="#" @click.prevent="getProducts(page)">{{ page }}</a>
         </li>
         <li class="page-item" v-if="pagination.has_next">
-          <!--下一頁-->
           <a
             class="page-link"
             href="#"
@@ -104,7 +102,6 @@
                   <label for="customFile">
                     或 上傳圖片
                     <i class="fas fa-spinner fa-spin" v-if="status.fileUploading"></i>
-                    <!--綁定判斷式 當觸發該事件時才會執行-->
                   </label>
                   <input
                     type="file"
@@ -218,7 +215,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary" @click.stop="updateProduct">確認</button>
+            <button type="button" class="btn btn-primary" @click.prevent="updateProduct">確認</button>
           </div>
         </div>
       </div>

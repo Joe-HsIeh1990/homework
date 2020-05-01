@@ -168,7 +168,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters} from "vuex";
 import $ from "jquery";
 export default {
   data() {
@@ -284,7 +284,6 @@ export default {
             function cardContainsFilter(i) {
               return g.title.indexOf(i) != -1;
             }
-            console.log(cardContainsFilter);
             if (filters.some(cardContainsFilter)) {
               vm.$store.state.products.forEach(item => {
                 if (item.category === g.zoe) {

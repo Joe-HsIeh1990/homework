@@ -24,9 +24,6 @@
               <a class="nav-link h5" href="#">商品列表</a>
             </li>
           </router-link>
-          <li class="nav-item active mx-2">
-            <a class="nav-link h5" href="#">實體店面位置</a>
-          </li>
         </ul>
         <div class="nav-item" @click="LoginCreate">
           <a href="#" class="nav-link">
@@ -39,7 +36,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
 import $ from "jquery";
 export default {
   name: "NavBar",

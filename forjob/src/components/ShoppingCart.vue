@@ -51,7 +51,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" v-if="openitem" data-dismiss="modal">取消</button>
           <button type="button" class="btn btn-dark" v-if="openitem" @click="opencheck() ">下單去</button>
-          <div class="col-12 checkbox" v-show="itemcheck">
+          <div class="col-12 checkbox" v-if="itemcheck">
             <ValidationObserver v-slot="{ invalid , reset }">
               <form @submit.prevent="createOrder" @reset.prevent="reset">
                 <div class="form-group">
@@ -76,16 +76,22 @@
                 </div>
                 <div class="form-group">
                   <label for="username">收件人姓名</label>
-                  <ValidationProvider name="姓名" rules="required|alpha" v-slot="{ errors }">
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="姓名"
-                      id="username"
-                      v-model="form.user.name"
-                      placeholder="輸入姓名"
-                    />
-                    <span class="text-danger">{{errors[0]}}</span>
+                  <ValidationProvider
+                    name="姓名"
+                    rules="required|alpha"
+                    v-slot="{ errors , classes }"
+                  >
+                    <div :class="classes">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="姓名"
+                        id="username"
+                        v-model="form.user.name"
+                        placeholder="輸入姓名"
+                      />
+                      <span class="text-danger">{{errors[0]}}</span>
+                    </div>
                   </ValidationProvider>
                 </div>
 
@@ -186,28 +192,29 @@ export default {
     },
     opencheck() {
       const vm = this;
-      if (!vm.$store.state.cart) {
-        vm.$bus.$emit("message:push", "請添加購物車內容", "success");
-      } else {
+      if (vm.cart.carts.length) {
         vm.itemcheck = true;
         vm.openitem = false;
         $(".checkbox").slideDown();
+      } else {
+        vm.$bus.$emit("message:push", "請添加購物車內容", "danger");
       }
     },
     closecheck() {
       const vm = this;
       vm.itemcheck = false;
       vm.openitem = true;
-      $(".checkbox").slideUP();
+      $(".checkbox").slideUp();
     },
     createOrder() {
       const vm = this;
-      const api = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/order`;
+      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/order`;
       const order = vm.form;
-      this.$http.post(api, { data: order }).then(response => {
-        console.log("訂單已建立", response);
+      vm.$store.dispatch("isLoad", true);
+      vm.$http.post(api, { data: order }).then(response => {
         if (response.data.success) {
-          vm.$router.push(`/customer_checkout/${response.data.orderId}`);
+          vm.$router.push(`/checkorder/${response.data.orderId}`);
+          vm.$store.dispatch("isLoad", false);
         }
       });
     }
@@ -227,7 +234,6 @@ export default {
   },
   created() {
     this.getCart();
-    // this.$bus.$emit("message:push", "這裡是一段訊息", "success");
   }
 };
 </script>

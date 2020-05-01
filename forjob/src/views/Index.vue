@@ -14,11 +14,10 @@
           class="d-flex d-md-none col-12"
           v-model="change"
           id="mod"
-          @click.prevent="optionChange()"
         >
-          <option value="a">神話時代</option>
-          <option value="b">混沌時代</option>
-          <option value="c">西格瑪時代</option>
+          <option value="a" @click.prevent="optionChange()">神話時代</option>
+          <option value="b" @click.prevent="optionChange()">混沌時代</option>
+          <option value="c" @click.prevent="optionChange()">西格瑪時代</option>
         </select>
         <ul class="d-none d-md-flex flex-column flex-md-row text-center px-0 col-md-12" id="cop">
           <li class="col-md-4 py-3 h4 rounded-left btn-css" @click.prevent="optionChange('a')">神話時代</li>

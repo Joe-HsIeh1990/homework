@@ -35,6 +35,7 @@ const routes = [
   },
   {
     path: '/administrator',
+    redirect: '/administrator/adminshop',
     name: 'Administrator',
     component: () => import('../components/Administrator'),
     children:
@@ -51,6 +52,11 @@ const routes = [
         }
       ]
   },
+  {
+    path: '/checkorder/:orderId',
+    name: 'CheckOrder',
+    component: () => import('../components/CheckOrder')
+  }
  
 ]
 

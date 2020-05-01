@@ -19,7 +19,7 @@
           <td><span v-text="item.user.email" v-if="item.user"></span></td>
           <td>
             <ul class="list-unstyled">
-              <li v-for="(product, i) in item.products" :key="i">
+              <li class="text-dark" v-for="(product, i) in item.products" :key="i">
                 {{ product.product.title }} 數量：{{ product.qty }}
                 {{ product.product.unit }}
               </li>

@@ -28,11 +28,9 @@ export default {
         timestamp,
       });
       this.removeMessageWithTiming(timestamp);
-      // this.$store.dispatch('updateMessage',{message, status})
     },
     removeMessage(num) {
       this.messages.splice(num, 1);
-      // this.$store.dispatch('removeMessage' , num)
     },
     removeMessageWithTiming(timestamp) {
       const vm = this;
@@ -43,7 +41,6 @@ export default {
           }
         });
       }, 5000);
-      // this.$store.dispatch('removeMessageWithTiming',timestamp)
     },
   },
   computed:{

@@ -9,12 +9,17 @@
           class="row col-12 m-auto justify-content-center align-items-center"
           id="mind"
         >
-          <router-view>
-            1212
-          </router-view>
+          <router-view></router-view>
         </main>
         <!-- icon -->
-        <div class="d-flex justify-content-center align-items-center" id="shoppagge" @click.prevent="ShowShop">
+        <div
+          class="d-flex justify-content-center align-items-center"
+          id="shoppagge"
+          @click.prevent="ShowShop"
+        >
+          <div class="circle_num text-center" v-if="cart.carts.length" >
+            <span class="text-white">{{cart.carts.length}}</span>
+          </div>
           <i class="fas fa-cart-arrow-down fa-2x text-light mr-1"></i>
         </div>
         <Login />
@@ -28,7 +33,7 @@ import $ from "jquery";
 import NavBar from "./NavBar";
 import Login from "./Login";
 import ShoppingCart from "./ShoppingCart";
-import Alert from './Alert'
+import Alert from "./Alert";
 export default {
   components: {
     NavBar,
@@ -40,17 +45,40 @@ export default {
     return {};
   },
   methods: {
+    getCarts() {
+      const vm = this;
+      vm.$store.dispatch("getCart");
+    },
     //open costomshop modal
     ShowShop() {
-     this.$store.dispatch('showshop' , true)
+      this.$store.dispatch("showshop", true);
     }
   },
-  mounted(){
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    }
+  },
+  mounted() {
+
+  },
+  created(){
+    this.getCarts()
   }
 };
 </script>
 
 <style scoped lang="scss">
+.circle_num {
+  position: absolute;
+  background: red;
+  right: 0;
+  top: 0;
+  width: 35%;
+  height: 35%;
+  border: 1px solid red;
+  border-radius: 50%;
+}
 // background
 #mind {
   background: url("../assets/images/827102967_preview_Wiki-background.jpg")
@@ -76,6 +104,9 @@ export default {
   box-shadow: unset #eee;
   transform: translate(5px, 10px);
   transition: 0.5s;
+}
+#shoppagge i {
+  position: relative;
 }
 @media (min-width: 768px) {
   #shoppagge {

@@ -6,20 +6,32 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  strict: true,
+  // strict: true,
   state: {
     logShow: false,
     isLoading: false,
     shopshow: false,
-    cart: {},
+    cart: {
+      carts: []
+    },
     products: [],
     productone: {},
     status: {
       loadingItem: ""
     },
     productshow: false,
+    // order: {
+    //   user: {},
+    // },
+    // orderId: '',
   },
   mutations: {
+    // ORDERID(state, payload) {
+    //   state.orderId = payload;
+    // },
+    // ORDER(state, payload) {
+    //   state.order = payload;
+    // },
     PROUCTSSHOW(state, payload) {
       state.productshow = payload;
     },
@@ -85,7 +97,9 @@ export default new Vuex.Store({
       const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/cart`;
       context.commit('ISLOADING', true)
       axios.get(api).then(response => {
-        context.commit('CARTS', response.data.data)
+        if (response.data.data.carts) {
+          context.commit('CARTS', response.data.data);
+        }
         context.commit('ISLOADING', false)
       });
     },
@@ -95,7 +109,7 @@ export default new Vuex.Store({
       let cart = {
         product_id: id,
         qty
-      }; 
+      };
       axios.post(api, { data: cart }).then(response => {
         if (response.data.sucess) {
           context.commit('PROUCTSSHOW', false);
@@ -112,6 +126,20 @@ export default new Vuex.Store({
         context.commit('ISLOADING', false);
       });
     },
+    // getOrder() {
+    //   const url = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/order/${state.orderId}`;
+    //   axios.get(url).then((response) => {
+    //     context.commit('ORDER', response.data.order)
+    //   });
+    // },
+    // payOrder() {
+    //   const url = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/pay/${state.orderId}`;
+    //   axios.post(url).then((response) => {
+    //     if (response.data.success) {
+    //       context.dispatch('getOrder');
+    //     }
+    //   });
+    // },
   },
   getters: {
     products(state) {
