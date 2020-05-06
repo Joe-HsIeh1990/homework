@@ -65,39 +65,37 @@
               <h2 class="text-dark text-center font-weight-bold">商品列表</h2>
             </div>
             <div class="line-of-item"></div>
-            <div class="d-flex my-4 justify-content-center col-12">
-              <loading :active.sync="isLoading"></loading>
+            <div class="d-flex flex-wrap my-4 justify-content-center col-12">
               <!-- cart -->
-              <div class="d-flex flex-wrap justify-content-center">
-                <div
-                  class="card my-2 mx-1 cart-shadow"
-                  style="width:251px;"
-                  v-for="items in filterData[currentPage]"
-                  :data-rou="items.category"
-                  :key="items.id"
-                >
-                  <img :src="items.imageUrl" class="card-img-top img-fluid" alt="..." /> 
-                  <div class="card-body border-top border-dark bg-dark">
-                    <div>
-                      <p class="card-text">{{items.title}}</p>
+              <!-- <div class="d-flex flex-wrap justify-content-center"> -->
+              <div
+                class="card my-2 mx-1 cart-shadow"
+                v-for="items in filterData[currentPage]"
+                :data-rou="items.category"
+                :key="items.id"
+              >
+                <img :src="items.imageUrl" class="card-img-top img-fluid" alt="..." />
+                <div class="card-body border-top border-dark bg-dark">
+                  <div>
+                    <p class="card-text">{{items.title}}</p>
+                  </div>
+                  <div class="d-flex flex-column">
+                    <div class="mt-3">
+                      <span
+                        style="text-decoration-line: line-through;"
+                      >原價 $NT {{items.origin_price | currency}}元</span>
+                      <br />
+                      <span>現在只要$NT {{items.price | currency}}元</span>
                     </div>
-                    <div class="d-flex flex-column">
-                      <div class="mt-3">
-                        <span
-                          style="text-decoration-line: line-through;"
-                        >原價 $NT {{items.origin_price | currency}}元</span>
-                        <br />
-                        <span>現在只要$NT {{items.price | currency}}元</span>
-                      </div>
-                      <div class="align-self-end mt-3">
-                        <button class="text-end" @click.prevent="GetProductOnce(items.id)">詳細內容</button>
-                      </div>
+                    <div class="align-self-end mt-3">
+                      <button class="text-end" @click.prevent="GetProductOnce(items.id)">詳細內容</button>
                     </div>
                   </div>
                 </div>
               </div>
+              <!-- </div> -->
             </div>
-            <nav class="my-5" aria-label="Page navigation example">
+            <nav class="my-5" aria-label="Page navigation example" v-if="pagerwd">
               <ul class="pagination justify-content-center">
                 <li
                   class="page-item"
@@ -109,6 +107,24 @@
                 </li>
               </ul>
             </nav>
+            <div class="dropup" v-if="pagemoble">
+              <button
+                type="button"
+                class="btn btn-dark dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >Action</button>
+              <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                <a
+                  class="dropdown-item active"
+                  v-for="pages in filterData.length"
+                  @click.prevent="currentPage = pages -1 "
+                  :key="pages"
+                  href="#"
+                >{{pages}}</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -168,7 +184,7 @@
   </div>
 </template>
 <script>
-import { mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 import $ from "jquery";
 export default {
   data() {
@@ -220,7 +236,9 @@ export default {
         { name: "混沌野獸人", zoe: "BeastsOfChaos", title: "j", checked: false }
       ],
       currentPage: 0,
-      checkedNames: []
+      checkedNames: [],
+      pagerwd: true,
+      pagemoble: false
     };
   },
   methods: {
@@ -304,6 +322,17 @@ export default {
         newProducts[page].push(item);
       });
       return newProducts;
+    },
+    rwdpage() {
+      let w = window.innerWidth;
+      let vm = this;
+      if (w <= 768) {
+        vm.pagerwd = false;
+        vm.pagemoble = true;
+      } else {
+        vm.pagerwd = true;
+        vm.pagemoble = false;
+      }
     }
   },
   mounted() {
@@ -313,6 +342,7 @@ export default {
   },
   created() {
     this.GetProductsAJAX();
+    this.rwdpage;
   }
 };
 </script>
@@ -361,7 +391,15 @@ input {
   background: #eee;
   width: 95%;
 }
+.card {
+  width: 100%;
+}
 .cart-shadow {
   box-shadow: 2px 2px 2px #000;
+}
+@media (min-width: 768px) {
+  .card {
+    width: 20%;
+  }
 }
 </style>

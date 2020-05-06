@@ -25,30 +25,28 @@ const routes = [
         path: 'costomshop',
         name: 'CostomShop',
         component: () => import('../views/CostomShop')
-      },
-      // {
-      //   path: 'costompagge',
-      //   name: 'CostomPagge',
-      //   component: () => import('../components/CostomPagge')
-      // }
+      }
     ]
   },
   {
     path: '/administrator',
     redirect: '/administrator/adminshop',
     name: 'Administrator',
+    meta: { requiresAuth: true },
     component: () => import('../components/Administrator'),
     children:
       [
         {
           path: 'adminshop',
           name: 'AdminShop',
-          component: () => import('../views/AdminShop')
+          component: () => import('../views/AdminShop'),
+          meta: { requiresAuth: true }
         },
         {
           path:'adminorder',
           name:'AdminOrder',
-          component: () => import('../views/AdminOrder')
+          component: () => import('../views/AdminOrder'),
+          meta: { requiresAuth: true }
         }
       ]
   },

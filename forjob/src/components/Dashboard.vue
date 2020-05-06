@@ -6,15 +6,13 @@
       <div class="row">
         <main
           role="main"
-          class="row col-12 m-auto justify-content-center align-items-center"
-          id="mind"
+          class="row col-12 m-auto justify-content-center align-items-center mind"
         >
           <router-view></router-view>
         </main>
         <!-- icon -->
         <div
-          class="d-flex justify-content-center align-items-center"
-          id="shoppagge"
+          class="d-flex justify-content-center align-items-center shoppagge"
           @click.prevent="ShowShop"
         >
           <div class="circle_num text-center" v-if="cart.carts.length" >
@@ -80,7 +78,7 @@ export default {
   border-radius: 50%;
 }
 // background
-#mind {
+.mind {
   background: url("../assets/images/827102967_preview_Wiki-background.jpg")
     no-repeat center center fixed;
   background-size: cover;
@@ -89,7 +87,7 @@ export default {
   height: 100%;
 }
 // icon css
-#shoppagge {
+.shoppagge {
   position: fixed;
   right: 10px;
   bottom: 50px;
@@ -100,16 +98,16 @@ export default {
   width: 75px;
   height: 75px;
 }
-#shoppagge:hover {
+.shoppagge:hover {
   box-shadow: unset #eee;
   transform: translate(5px, 10px);
   transition: 0.5s;
 }
-#shoppagge i {
+.shoppagge i {
   position: relative;
 }
 @media (min-width: 768px) {
-  #shoppagge {
+  .shoppagge {
     position: fixed;
     right: 50px;
     bottom: 50px;

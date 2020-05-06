@@ -50,7 +50,8 @@
         </tbody>
       </table>
       <div class="text-right" v-if="order.is_paid === false">
-        <button class="btn btn-danger">確認付款去</button>
+        <button class="btn btn-danger mr-2" @click.prevent="backpages()">返回上一頁</button>
+        <button class="btn btn-dark">確認付款去</button>
       </div>
     </form>
   </div>
@@ -70,34 +71,25 @@ export default {
     getOrder() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/order/${vm.orderId}`;
-      vm.$store.dispatch('isLoad',true)
       this.$http.get(url).then((response) => {
         vm.order = response.data.order;
-        vm.$store.dispatch('isLoad',false)
       });
-      // this.$store.dispatch('getOrder')
-
     },
     payOrder() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/pay/${vm.orderId}`;
-      vm.$store.dispatch('isLoad',true)
       this.$http.post(url).then((response) => {
         if (response.data.success) {
-          vm.$store.dispatch('isLoad',false)
           vm.getOrder();
         }
       });
-      // this.$store.dispatch('payOrder')
     },
+    backpages(){
+      this.$bus.$emit("message:push", "將返回上一頁，購物車將清空", "danger");
+      this.$router.push('/costomShop');
+    }
   },
   computed:{
-    // orderId(){
-    //   return this.$store.state.orderId;
-    // },
-    // order(){
-    //   return this.$store.state.order;
-    // }
   },
   created() {
     this.orderId = this.$route.params.orderId;

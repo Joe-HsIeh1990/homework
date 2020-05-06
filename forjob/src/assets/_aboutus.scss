@@ -1,0 +1,63 @@
+#abc {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  #abc p {
+    color: white;
+    font-size: 18px;
+  }
+  #abc-title {
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+  }
+  .uslogo {
+    max-width: 130px;
+    max-height: 130px;
+  }
+  #slider {
+    height: 200px;
+    width: 80vw;
+    margin: auto;
+  }
+  .imge {
+    height: 200px;
+  }
+  #pagechange {
+    background-color: #000;
+  }
+  
+  .pagechange {
+    background-color: rgb(0, 0, 0);
+    border: 1px outset rgb(48, 47, 47);
+    padding: 15px;
+    color: white;
+  }
+  .pagechange:hover {
+    box-shadow: 3px 3px rgb(95, 93, 93);
+    transform: translate(-5px, -5px);
+    transition: 0.5s;
+  }
+  #changemy {
+    background-color: rgb(27, 27, 27);
+    width: 80vw;
+  }
+  
+  @media (min-width: 768px) {
+    #slider {
+      height: 90%;
+      width: 90%;
+      margin: auto;
+    }
+    .imge {
+      height: 450px;
+    }
+    #changemy {
+      background-color: rgb(27, 27, 27);
+      width: 50vw;
+    }
+    .img-h {
+      height: 55vh;
+    }
+    #hobit {
+      margin-top: 100px;
+      margin-bottom: 140px;
+    }
+  }

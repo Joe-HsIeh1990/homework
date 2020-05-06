@@ -148,7 +148,7 @@
                 <div class="text-right">
                   <button type="reset" class="mr-2 btn btn-light">清除錯誤提示</button>
                   <button class="mr-2 btn btn-danger" @click.prevent="closecheck()">取消</button>
-                  <button class="btn btn-dark" :disabled="invalid">送出訂單</button>
+                  <button class="btn btn-dark" @click="close" :disabled="invalid">送出訂單</button>
                 </div>
               </form>
             </ValidationObserver>
@@ -205,6 +205,9 @@ export default {
       vm.itemcheck = false;
       vm.openitem = true;
       $(".checkbox").slideUp();
+    },
+    close(){
+      $("#cardmodal").modal("hide");
     },
     createOrder() {
       const vm = this;
