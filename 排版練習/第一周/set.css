@@ -1,0 +1,270 @@
+.title_name{
+    width: 288px;
+    height: 180px;
+    margin-top: 48px; 
+    font-size: 80px;
+    line-height: 90px;
+    letter-spacing: 8px;
+}
+.avatarbox{
+    width: 324px;
+    height: 324px;
+    margin-bottom: 48px;
+}
+/* status */
+.mystatus{
+    width: 239px;
+}
+
+.myname{
+    width: 438PX;
+    height: 105px;
+    margin-bottom: 24px;
+}
+
+.myname p{
+    font-size: 24px;
+    line-height: 36px;
+
+}
+.myskill{
+    width: 696px;
+    height: 105px;
+    margin-bottom: 72px;
+}
+.myskill p{
+    font-size: 24px;
+    line-height: 36px;
+}
+/*  */
+.myschool{
+    width: 211px;
+}
+
+/* circle */
+.circle{
+    width: 16px;
+    height: 16px;
+    margin-right: 16px;
+    background-color: #96A9C4;
+    border-radius: 50%;
+    margin-left: 16px;
+    margin-top: 9px;
+}
+.circle_place{
+    position: relative;
+    height: 78px;
+    width: 16px;
+    margin-top: 10px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+.circle_place div:nth-child(1){
+    width: 16px;
+    height: 16px;
+    background-color: #96A9C4;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+}
+.circle_place div:nth-child(2){
+    height: 66px;
+    width: 2px;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right:45%;
+    rotate: 180deg;
+    background-color: #96A9C4;
+}
+.circle_place div:nth-child(3){
+    width: 16px;
+    height: 16px;
+    background-color: #96A9C4;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+/* unity */
+.unity div:nth-child(1){
+    height: 33px;
+    width: 603px;
+    margin-bottom: 32px;
+}
+.unity div:nth-child(1) p{
+    font-size: 24px;
+    line-height: 36px;
+}
+.unity div:nth-child(2){
+    height: 33px;
+    width: 603px;
+    margin-bottom: 72px;
+}
+.unity div:nth-child(2) p{
+    font-size: 24px;
+    line-height: 36px;
+}
+.post{
+    width: 1920px;
+    height: 494px;
+    position: relative;
+    margin-bottom: 72px;
+}
+.bgline{
+    width: 1920px;
+    height: 360px;
+    position: absolute;
+    background-color: #96A9C4;
+    top: 67px;
+    z-index: 1;
+}
+.placemenu{
+    width: 1200px;
+    height: 494px;
+    position: absolute;
+    background-color: #415165;
+    z-index: 2;
+    top: 0;
+    left: 360px;
+}
+.skill{
+    width:159px;
+    margin: 0 auto;
+}
+.skill h2{
+    margin-top: 24px;
+    margin-bottom: 8px;
+    margin-right: 16px;
+    font-size: 32px;
+    line-height: 45px;
+    color: #FFFFFF;
+}
+.skill small{
+    font-size: 24px;
+    line-height: 32px;
+    color: #FFFFFF;
+    margin-bottom: 14px;
+    margin-top: 31px;
+}
+.place_line{
+    width: 996px;
+    height: 2px;
+    background-color: #FFFFFF;
+    margin:0 auto;
+    margin-bottom: 40px;
+}
+.skill_num{
+    box-sizing: border-box;
+    width: 216px;
+    height: 312.5px;
+    border-left: 1px solid #96A9C4;
+    margin: 0 auto;
+}
+.skill_num p{
+    font-size: 24px;
+    line-height: 36px;
+    color: #FFFFFF;
+    margin-left: 24px;
+    white-space: nowrap;
+}
+/* work */
+.work{
+    width: 360px;
+}
+/* travel */
+.travel{
+    height: 647px;
+    width: 666px;
+    border-left: 1px solid rgb(186, 187, 189);
+    margin-top: 6px;
+    margin-left: 24px;
+    margin-bottom: 72px;
+    box-sizing: border-box;
+
+}
+.travel h3{
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: bolder;
+    margin-left: 24px;
+    height: 33px;
+}
+.travel > img{
+    width: 89.5px;
+    height: 66.85px;
+    margin-left: 24px;
+    margin-bottom: 8.15px;
+}
+.travel div{
+    width: 642px;
+    height: 154px;    
+    margin-left: 24px;
+}
+.travel div p{
+    font-size: 20px;
+    line-height: 30px;
+}
+#simt{
+    width: 72px;
+    height: 73px;
+    margin-bottom: 8px;
+}
+.travel > p{
+    font-size: 20px;
+    line-height: 30px;
+    margin-left: 24px;
+}
+/* footer */
+footer{
+    height: 401px;
+    background-color: #415165;
+}
+.cell{
+    width: 354px;
+    height: 45px;
+    margin-top: 31px;
+    margin-bottom: 8px;
+}
+.cell h2{
+    font-size: 32px;
+    line-height: 45px;
+    height: 45px;
+    color: #FFFFFF;
+}
+.cell p{
+    font-size: 24px;
+    line-height: 32px;
+    margin-top: 7px;
+    margin-bottom: 6px;
+    margin-left: 16px;
+    color: #FFFFFF;
+}
+footer div:nth-child(2){
+    width: 1200px;
+    height: 2px;
+    background-color: #FFFFFF;
+}
+footer > p{
+    font-size: 24px;
+    line-height: 36px;
+    height: 33px;
+    margin-bottom: 16px;
+    color: #ffff;
+}
+footer a{
+    font-size: 24px;
+    line-height: 36px;
+    height: 33px;
+    margin-bottom: 16px;
+    text-decoration: none;
+    color: #ffff;
+}
+footer img {
+    height: 48px;
+    width: 48px;
+}
