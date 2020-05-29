@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
+    pagination: {},
 
   },
   mutations: {
@@ -15,16 +16,18 @@ export default new Vuex.Store({
       state.products.forEach(e=>{
        e.is_enabled = false;
       })
+    },
+    PAGINATION(state, payload){
+       state.pagination = payload 
     }
   },
   actions: {
-    GetProducts(context) {
-      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/products/all`;
-      // context.commit('ISLOADING', true)
+    GetProducts(context , payload) {
+      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_COSTOM}/products?page=${payload}`;
       axios.get(api).then(response => {
-        context.commit('PRODUCTS', response.data.products)
-        // console.log(response.data.products)
-        // context.commit('ISLOADING', false)
+        context.commit('PRODUCTS', response.data.products);
+        context.commit('PAGINATION', response.data.pagination);
+    
       });
     },
   },

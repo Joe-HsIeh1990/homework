@@ -28,7 +28,7 @@
                   v-for="clickbox in  listclick"
                   :key="clickbox.zoe"
                   :data-ck="clickbox.zoe"
-                  @click="targeit"
+                  @click="GetKind(clickbox.zoe)"
                 >
                   <a href="#">{{ clickbox.name }}&nbsp;</a>
                 </li>
@@ -47,14 +47,7 @@
                   :key="itembox.title"
                 >
                   <label :for="itembox.zoe" class="h5 mb-0">{{ itembox.name }}</label>
-                  <input
-                    type="checkbox"
-                    class="check"
-                    name
-                    :id="itembox.zoe"
-                    v-model="checkedNames"
-                    :value="itembox.zoe"
-                  />
+                  <input type="checkbox" class="check" name :id="itembox.zoe" :value="itembox.zoe" />
                 </div>
               </div>
             </form>
@@ -62,7 +55,7 @@
               <div class="col-12 row jusitfy-content-center mx-0">
                 <div
                   class="item-card d-flex flex-md-column flex-row mx-md-2 mb-2"
-                  v-for="itemall in flitersData[currentPage]"
+                  v-for="itemall in gamer"
                   :key="itemall.id"
                 >
                   <div class="img-position" @mousemove.stop="HoverShow">
@@ -95,15 +88,35 @@
                   </div>
                 </div>
               </div>
-              <nav class="my-5" aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item" :class="{'disabled': !pagination.has_pre}">
+                    <a
+                      class="page-link"
+                      href="#"
+                      aria-label="Previous"
+                      @click.prevent="GetProducts(pagination.current_page -1)"
+                    >
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
                   <li
                     class="page-item"
-                    :class="{active: currentPage === page - 1}"
-                    v-for="page in flitersData.length"
+                    v-for="page in pagination.total_pages"
                     :key="page"
+                    :class="{'active':pagination.current_page === page}"
                   >
-                    <a href="#" class="page-link" @click.prevent="currentPage = page -1 ">{{page}}</a>
+                    <a class="page-link" href="#" @click.prevent="GetProducts(page)">{{ page }}</a>
+                  </li>
+                  <li class="page-item" :class="{'disabled': !pagination.has_next}">
+                    <a
+                      class="page-link"
+                      href="#"
+                      aria-label="Next"
+                      @click.prevent="GetProducts(pagination.current_page +1)"
+                    >
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -127,9 +140,8 @@ export default {
       rwdselect: false,
       hover_btn: false,
       item_btn: false,
+      gamer:[],
       currentPage: 0,
-      checkedNames: [],
-      shopitems: [],
       listclick: [
         {
           name: "ALL",
@@ -147,12 +159,6 @@ export default {
         }
       ],
       checkbox: [
-        // {
-        //   name: "ALL",
-        //   zoe: "all",
-        //   title: "all",
-        //   checkboolen: false
-        // },
         {
           name: "Game",
           zoe: "game",
@@ -169,9 +175,9 @@ export default {
     };
   },
   methods: {
-    GetProducts() {
+    GetProducts(page = 1) {
       let vm = this;
-      vm.$store.dispatch("GetProducts");
+      vm.$store.dispatch("GetProducts", page);
     },
     dropdown() {
       let vm = this;
@@ -203,52 +209,38 @@ export default {
         }
       });
     },
-    targeit(e){
+    GetKind(item) {
       let vm = this;
-      let target = e.target.dataset.ck;
-      console.log(target)
-      console.log(vm.flitersData)
+      vm.products.forEach(items => {
+        if(items.category == item){
+          vm.gamer = items
+          console.log(items)
+        }
+      });
     }
   },
   computed: {
-    flitersData() {
-      let vm = this;
-      let newArray = [];
-      let newproducts = [];
-      let fliters = vm.checkedNames;
-      if (fliters != 0) {
-        vm.checkbox.forEach(list => {
-          function cardFliter(i) {
-            return list.zoe.indexOf(i) != -1;
-          }
-          if (fliters.some(cardFliter)) {
-            vm.$store.state.products.forEach(items => {
-              if (items.category === list.zoe) {
-                newArray.push(items);
-              }
-            });
-          }
-        });
-      } else {
-        newArray = vm.$store.state.products;
-      }
-      newArray.forEach((item, index) => {
-        if (index % 8 === 0) {
-          newproducts.push([]);
-        }
-        const page = parseInt(index / 8);
-        newproducts[page].push(item);
-      });
-      return newproducts;
+    // filterData(item){
+    //   let vm = this;
+    //   let change = vm.products.filter(function(e) {
+    //       if (e.category == item) {
+    //         return item;
+    //       }
+    // },
+    //   fliterGame() {
+    //     let vm = this;
+    //     let gamer = vm.$store.state.products.filter(function(item) {
+    //       if (item.category == "game") {
+    //         return item;
+    //       }
+    //     });
+    //     return gamer;
+    //   }
+    products() {
+      return this.$store.state.products;
     },
-    fliterGame() {
-      let vm = this;
-      let gamer = vm.$store.state.products.filter(function(item) {
-        if (item.category == "game") {
-          return item;
-        }
-      });
-      return gamer;
+    pagination() {
+      return this.$store.state.pagination;
     }
   },
   mounted() {
