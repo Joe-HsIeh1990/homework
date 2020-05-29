@@ -88,7 +88,7 @@
                   </div>
                 </div>
               </div>
-              <nav aria-label="Page navigation example">
+              <!-- <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item" :class="{'disabled': !pagination.has_pre}">
                     <a
@@ -119,7 +119,7 @@
                     </a>
                   </li>
                 </ul>
-              </nav>
+              </nav>-->
             </div>
           </li>
         </ul>
@@ -140,7 +140,7 @@ export default {
       rwdselect: false,
       hover_btn: false,
       item_btn: false,
-      gamer:[],
+      gamer: [],
       currentPage: 0,
       listclick: [
         {
@@ -175,9 +175,9 @@ export default {
     };
   },
   methods: {
-    GetProducts(page = 1) {
+    GetProducts() {
       let vm = this;
-      vm.$store.dispatch("GetProducts", page);
+      vm.$store.dispatch("GetProducts");
     },
     dropdown() {
       let vm = this;
@@ -211,10 +211,14 @@ export default {
     },
     GetKind(item) {
       let vm = this;
+      let array = [];
       vm.products.forEach(items => {
-        if(items.category == item){
-          vm.gamer = items
-          console.log(items)
+        if (item === items.category) {
+          array.push(items);
+          vm.gamer = array;
+        } else if (item === "all") {
+          array.push(items);
+          vm.gamer = array;
         }
       });
     }
@@ -227,15 +231,15 @@ export default {
     //         return item;
     //       }
     // },
-    //   fliterGame() {
-    //     let vm = this;
-    //     let gamer = vm.$store.state.products.filter(function(item) {
-    //       if (item.category == "game") {
-    //         return item;
-    //       }
-    //     });
-    //     return gamer;
-    //   }
+      // fliterGame() {
+      //   let vm = this;
+      //   let gamer = vm.$store.state.products.filter(function(item) {
+      //     if (item.category == "game") {
+      //       return item;
+      //     }
+      //   });
+      //   return gamer;
+      // },
     products() {
       return this.$store.state.products;
     },
@@ -259,6 +263,7 @@ export default {
   },
   created() {
     this.GetProducts();
+    this.GetKind();
   }
 };
 </script>
